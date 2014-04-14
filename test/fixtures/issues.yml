@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  magazine_id: 1
+  number: 1
+  date: 2014-04-14
+  due_date: 2014-04-14
+  status: MyString
+
+two:
+  magazine_id: 1
+  number: 1
+  date: 2014-04-14
+  due_date: 2014-04-14
+  status: MyString

@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to magazines_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_magazine_path(@magazine), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show magazine</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Title:</dt>
+  <dd><%= @magazine.title %></dd>
+
+  <dt>Issue:</dt>
+  <dd><%= @magazine.issue %></dd>
+
+  <dt>Prints:</dt>
+  <dd><%= @magazine.prints %></dd>
+
+  <dt>Subscribers:</dt>
+  <dd><%= @magazine.subscribers %></dd>
+
+  <dt>Readership:</dt>
+  <dd><%= @magazine.readership %></dd>
+
+  <dt>Picture:</dt>
+  <dd><%= @magazine.picture %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @magazine.status %></dd>
+
+</dl>

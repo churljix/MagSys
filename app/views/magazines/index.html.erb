@@ -1,0 +1,41 @@
+<div class="page-header">
+  <%= link_to new_magazine_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Magazine
+  <% end %>
+  <h1>Listing magazines</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Title</th>
+            <th>Issue</th>
+            <th>Prints</th>
+            <th>Subscribers</th>
+            <th>Readership</th>
+            <th>Picture</th>
+            <th>Status</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @magazines) do |magazine| %>
+            <td><%= magazine.title %></td>
+            <td><%= magazine.issue %></td>
+            <td><%= magazine.prints %></td>
+            <td><%= magazine.subscribers %></td>
+            <td><%= magazine.readership %></td>
+            <td><%= image_tag magazine.picture, size: "80x100" %></td>
+            <td><%= magazine.status %></td>
+            <td><%= link_to 'Show', magazine %></td>
+        <td><%= link_to 'Edit', edit_magazine_path(magazine) %></td>
+        <td><%= link_to 'Destroy', magazine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
