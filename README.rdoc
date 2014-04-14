@@ -1,4 +1,8 @@
-== README
+----***---- Advertising space management system for magazines ----***----
+
+More information soon to come.
+
+___________________________________________________________________________________
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
