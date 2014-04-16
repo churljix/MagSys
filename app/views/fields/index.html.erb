@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to new_field_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    New Field
+  <% end %>
+  <h1>Listing fields</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>Title</th>
+            <th>Height</th>
+            <th>Width</th>
+            <th>Price</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @fields) do |field| %>
+            <td><%= field.title %></td>
+            <td><%= field.height %></td>
+            <td><%= field.width %></td>
+            <td><%= field.price %></td>
+            <td><%= link_to 'Show', field %></td>
+        <td><%= link_to 'Edit', edit_field_path(field) %></td>
+        <td><%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

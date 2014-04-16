@@ -1,4 +1,6 @@
 MagSys::Application.routes.draw do
+  resources :fields
+
   resources :issues
 
   resources :magazines
