@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 9.99
+  remaining: 9.99
+  date: 2014-04-20
+  due_date: 2014-04-20
+  contract_id: 1
+  note: MyString
+
+two:
+  total: 9.99
+  remaining: 9.99
+  date: 2014-04-20
+  due_date: 2014-04-20
+  contract_id: 1
+  note: MyString

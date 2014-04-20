@@ -1,0 +1,44 @@
+<div class="page-header">
+  <%= link_to orders_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_order_path(@order), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show order</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Issue:</dt>
+  <dd><%= @order.issue_id %></dd>
+
+  <dt>Field:</dt>
+  <dd><%= @order.field_id %></dd>
+
+  <dt>Client:</dt>
+  <dd><%= @order.client_id %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @order.user_id %></dd>
+
+  <dt>Contract:</dt>
+  <dd><%= @order.contract_id %></dd>
+
+  <dt>Title:</dt>
+  <dd><%= @order.title %></dd>
+
+  <dt>Notes:</dt>
+  <dd><%= @order.notes %></dd>
+
+  <dt>Total amount:</dt>
+  <dd><%= @order.total_amount %></dd>
+
+  <dt>Remaining:</dt>
+  <dd><%= @order.remaining %></dd>
+
+  <dt>Special:</dt>
+  <dd><%= @order.special %></dd>
+
+</dl>

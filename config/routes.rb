@@ -1,4 +1,20 @@
 MagSys::Application.routes.draw do
+  resources :orders
+
+  resources :contracts
+
+  resources :messages
+
+  resources :invoices
+
+  resources :payments
+
+  resources :users
+
+  resources :agencies
+
+  resources :clients
+
   resources :fields
 
   resources :issues

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  agency_id: 1
+  date: 2014-04-20
+  discount: 9.99
+  notes: MyString
+  last_updated_by: 1
+
+two:
+  agency_id: 1
+  date: 2014-04-20
+  discount: 9.99
+  notes: MyString
+  last_updated_by: 1

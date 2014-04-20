@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to contracts_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_contract_path(@contract), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show contract</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Agency:</dt>
+  <dd><%= @contract.agency_id %></dd>
+
+  <dt>Date:</dt>
+  <dd><%= @contract.date %></dd>
+
+  <dt>Discount:</dt>
+  <dd><%= @contract.discount %></dd>
+
+  <dt>Notes:</dt>
+  <dd><%= @contract.notes %></dd>
+
+  <dt>Last updated by:</dt>
+  <dd><%= @contract.last_updated_by %></dd>
+
+</dl>

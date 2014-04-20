@@ -1,0 +1,32 @@
+<div class="page-header">
+  <%= link_to invoices_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_invoice_path(@invoice), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show invoice</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Total:</dt>
+  <dd><%= @invoice.total %></dd>
+
+  <dt>Remaining:</dt>
+  <dd><%= @invoice.remaining %></dd>
+
+  <dt>Date:</dt>
+  <dd><%= @invoice.date %></dd>
+
+  <dt>Due date:</dt>
+  <dd><%= @invoice.due_date %></dd>
+
+  <dt>Contract:</dt>
+  <dd><%= @invoice.contract_id %></dd>
+
+  <dt>Note:</dt>
+  <dd><%= @invoice.note %></dd>
+
+</dl>

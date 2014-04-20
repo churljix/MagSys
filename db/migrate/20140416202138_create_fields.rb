@@ -9,6 +9,6 @@ class CreateFields < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index(:issues, :magazine_id)
+    add_index(:fields, :magazine_id)
   end
 end

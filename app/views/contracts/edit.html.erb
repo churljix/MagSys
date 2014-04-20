@@ -1,0 +1,13 @@
+<div class="page-header">
+  <%= link_to contracts_path, :class => 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to @contract, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Show
+  <% end %>
+  <h1>Editing contract</h1>
+</div>
+
+<%= render 'form' %>
