@@ -139,7 +139,8 @@ ActiveRecord::Schema.define(version: 20140420210133) do
   add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id"
 
   create_table "users", force: true do |t|
-    t.string   "nickname"
+    t.string   "username"
+    t.string   "password_digest"
     t.string   "name"
     t.string   "last_name"
     t.string   "email"

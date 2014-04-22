@@ -1,4 +1,9 @@
 MagSys::Application.routes.draw do
+  #get "access/index"
+  #get "access/login"
+  root 'magazines#index'
+  get 'admin' , :to => "access#index"
+
   resources :orders
 
   resources :contracts

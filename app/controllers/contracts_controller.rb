@@ -1,6 +1,6 @@
 class ContractsController < ApplicationController
   before_action :set_contract, only: [:show, :edit, :update, :destroy]
-
+  before_action :confirm_logged_in
   # GET /contracts
   # GET /contracts.json
   def index

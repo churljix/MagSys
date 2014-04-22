@@ -1,4 +1,5 @@
 class AgenciesController < ApplicationController
+  before_action :confirm_logged_in
   before_action :set_agency, only: [:show, :edit, :update, :destroy]
 
   # GET /agencies

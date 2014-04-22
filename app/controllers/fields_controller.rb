@@ -1,6 +1,6 @@
 class FieldsController < ApplicationController
   before_action :set_field, only: [:show, :edit, :update, :destroy]
-
+  before_action :confirm_logged_in
   # GET /fields
   # GET /fields.json
   def index
