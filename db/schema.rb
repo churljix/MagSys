@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140420210133) do
+ActiveRecord::Schema.define(version: 20140424201821) do
 
   create_table "agencies", force: true do |t|
     t.string   "title"
@@ -137,6 +137,23 @@ ActiveRecord::Schema.define(version: 20140420210133) do
   end
 
   add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id"
+
+  create_table "roles", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name"], name: "index_roles_on_name", unique: true
+
+  create_table "user_roles", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "role_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_roles", ["user_id", "role_id"], name: "index_user_roles_on_user_id_and_role_id"
 
   create_table "users", force: true do |t|
     t.string   "username"

@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 	belongs_to :agency
 	has_many :orders
 
+  	simple_roles
+
 end

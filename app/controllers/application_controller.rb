@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
   		return true
   	end	
   end
+
+  def system_user
+    unless session[:user_id]
+      return false
+    else
+      return true
+    end 
+  end
 end

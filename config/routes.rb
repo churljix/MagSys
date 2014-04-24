@@ -1,4 +1,6 @@
 MagSys::Application.routes.draw do
+  get "registration/index"
+  get "registration/register"
   #get "access/index"
   #get "access/login"
   root 'magazines#index'

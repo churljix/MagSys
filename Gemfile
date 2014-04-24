@@ -29,9 +29,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap-generators', '~> 3.1.1'
 
-
-gem "cancan" #authorization
-gem 'groupify'
+gem 'simple_roles' #role management
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
