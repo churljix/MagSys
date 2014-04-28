@@ -22,11 +22,12 @@ MagSys::Application.routes.draw do
 
   resources :clients
 
-  resources :fields
-
-  resources :issues
-
-  resources :magazines
+  resources :magazines do
+    resources :issues do
+      resources :fields
+      
+    end
+  end
 
 match ':controller(/:action(/:id))', :via => [:get,:post]
 

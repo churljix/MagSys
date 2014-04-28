@@ -1,7 +1,11 @@
 <div class="page-header">
-  <%= link_to new_issue_path, :class => 'btn btn-primary' do %>
+  <%= link_to new_magazine_issue_path(@magazine.id), :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     New Issue
+  <% end %>
+  <%= link_to magazines_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Show Magazines
   <% end %>
   <h1>Listing issues</h1>
 </div>
@@ -23,15 +27,15 @@
 
     <tbody>
       <%= content_tag_for(:tr, @issues) do |issue| %>
-      <% @magazine = Magazine.find(issue.magazine_id) %>
-            <td><%= @magazine.title %></td>
+            <td><%= issue.magazine.title %></td>
             <td><%= issue.number %></td>
             <td><%= issue.date %></td>
             <td><%= issue.due_date %></td>
             <td><%= issue.status %></td>
-            <td><%= link_to 'Show', issue %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', magazine_issue_path(@magazine, issue) %></td>
+          <td><%= link_to 'Show Fields', magazine_issue_fields_path(@magazine, issue) %></td>
+        <td><%= link_to 'Edit', edit_magazine_issue_path(@magazine, issue) %></td>
+        <td><%= link_to 'Destroy', magazine_issue_path(@magazine, issue), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tbody>
   </table>

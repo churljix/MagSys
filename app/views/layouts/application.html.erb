@@ -41,10 +41,10 @@
         <% end %>
         <ul class="nav navbar-nav navbar-right">
           <% if session[:user_id] %>
-          <li><%= link_to("Logout", :controller => 'access' ,:action => 'logout') %></li>
+            <li><%= link_to("Logout", :controller => 'access' ,:action => 'logout') %></li>
           <% else %>
 
-          <li><%= link_to("Login", :controller => 'access' ,:action => 'login') %></li>
+            <li><%= link_to("Login", :controller => 'access' ,:action => 'login') %></li>
 
           <% end %>
 

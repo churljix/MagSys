@@ -1,16 +1,21 @@
 class IssuesController < ApplicationController
-  before_action :set_issue, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  # before_action :require_role :admin
+  before_action :find_magazine
+  before_action :set_issue, only: [:show, :edit, :update, :destroy]
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
+    if params[:magazine_id]
+      @issues = Issue.where :magazine_id => params[:magazine_id]
+    else
+      @issues = Issue.all
+    end
   end
 
   # GET /issues/1
   # GET /issues/1.json
   def show
-    @magazine = Magazine.find(@issue.magazine_id)
   end
 
   # GET /issues/new
@@ -29,7 +34,7 @@ class IssuesController < ApplicationController
 
     respond_to do |format|
       if @issue.save
-        format.html { redirect_to @issue, notice: 'Issue was successfully created.' }
+        format.html { redirect_to [@magazine, @issue], notice: 'Issue was successfully created.' }
         format.json { render action: 'show', status: :created, location: @issue }
       else
         format.html { render action: 'new' }
@@ -43,7 +48,7 @@ class IssuesController < ApplicationController
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue, notice: 'Issue was successfully updated.' }
+        format.html { redirect_to [@magazine, @issue], notice: 'Issue was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -57,7 +62,7 @@ class IssuesController < ApplicationController
   def destroy
     @issue.destroy
     respond_to do |format|
-      format.html { redirect_to issues_url }
+      format.html { redirect_to magazine_issues_url }
       format.json { head :no_content }
     end
   end
@@ -71,5 +76,9 @@ class IssuesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def issue_params
       params.require(:issue).permit(:magazine_id, :number, :date, :due_date, :status)
+    end
+
+    def find_magazine
+      @magazine = Magazine.find(params[:magazine_id])
     end
 end
