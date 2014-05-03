@@ -1,5 +1,5 @@
 <div class="page-header">
-  <%= link_to new_magazine_issue_field_path(@magazine, @issue), :class => 'btn btn-primary' do %>
+  <%= link_to new_magazine_field_path(@magazine), :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     New Field
   <% end %>
@@ -26,9 +26,9 @@
             <td><%= field.height %></td>
             <td><%= field.width %></td>
             <td><%= field.price %></td>
-            <td><%= link_to 'Show', magazine_issue_field_path(@magazine, @issue, field) %></td>
-        <td><%= link_to 'Edit', edit_magazine_issue_field_path(@magazine, @issue, field) %></td>
-        <td><%= link_to 'Destroy', magazine_issue_field_path(@magazine, @issue, field), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Show', magazine_field_path(@magazine,field) %></td>
+        <td><%= link_to 'Edit', edit_magazine_field_path(@magazine,field) %></td>
+        <td><%= link_to 'Destroy', magazine_field_path(@magazine, field), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tbody>
   </table>

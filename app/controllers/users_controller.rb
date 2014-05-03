@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+  before_action :confirm_logged_in, :except => [ :show, :create, :new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :confirm_logged_in
+  
   # GET /users
   # GET /users.json
   def index
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user.roles = :agent
   end
 
   # GET /users/1/edit
@@ -25,7 +27,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    @user.roles = :agent
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -69,6 +71,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:nickname, :name, :last_name, :email, :phone, :agency_id)
+      params.require(:user).permit(:username, :name, :last_name, :email, :phone, :agency_id, :password, :password_confirmation)
     end
 end

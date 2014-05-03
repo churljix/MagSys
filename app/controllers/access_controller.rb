@@ -1,5 +1,6 @@
 class AccessController < ApplicationController
 	before_action :confirm_logged_in, :except => [:login, :attempt_login, :logout]
+  before_action :system_user, :only => [:login,:attempt_login]
   def index
   	#dispaly text
   end
@@ -35,4 +36,16 @@ class AccessController < ApplicationController
     redirect_to(:action => "login")
   end
 
+  # def registration
+  #   #registartion form
+  # end
+
+  # def attempt_registration
+  #   #if params[:username].present? && params[:password].present?
+  #   if params[:password] = params[:password1] 
+  #     redirect_to(:action => 'registration')
+  #   else
+  #     redirect_to(:action => 'login')
+  #   end
+  # end
 end

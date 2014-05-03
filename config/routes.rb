@@ -1,6 +1,6 @@
 MagSys::Application.routes.draw do
-  get "registration/index"
-  get "registration/register"
+  #get "registration/index"
+  #get "registration/register"
   #get "access/index"
   #get "access/login"
   root 'magazines#index'
@@ -23,13 +23,11 @@ MagSys::Application.routes.draw do
   resources :clients
 
   resources :magazines do
-    resources :issues do
-      resources :fields
-      
-    end
+    resources :issues
+    resources :fields
   end
 
-match ':controller(/:action(/:id))', :via => [:get,:post]
+match ':controller(/:action(/:id))', :via => [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

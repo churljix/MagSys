@@ -2,10 +2,10 @@ class RegistrationController < ApplicationController
   def index
   end
 
-  def register
+  def registration
   end
 
-  def attempt_register
+  def attempt_registration
   	
   end
 end

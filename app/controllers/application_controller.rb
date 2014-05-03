@@ -18,9 +18,16 @@ class ApplicationController < ActionController::Base
 
   def system_user
     unless session[:user_id]
-      return false
+      return true
     else
+      flash[:notice]= "Already logged in"
+      redirect_to(magazines_path)
       return true
     end 
+  end
+
+  def user_role
+    @user = User.find(session[:user_id])
+    #if @user.roles_list
   end
 end
