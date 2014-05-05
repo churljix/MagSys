@@ -22,6 +22,7 @@
             <th></th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -33,7 +34,7 @@
             <td><%= issue.due_date %></td>
             <td><%= issue.status %></td>
           <td><%= link_to 'Show', magazine_issue_path(@magazine, issue) %></td>
-          <td><%= link_to 'Show Fields', magazine_fields_path(@magazine, issue) %></td>
+          <td><%= link_to 'Show Fields', magazine_issue_fields_path(@magazine, issue) %></td>
         <td><%= link_to 'Edit', edit_magazine_issue_path(@magazine, issue) %></td>
         <td><%= link_to 'Destroy', magazine_issue_path(@magazine, issue), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>

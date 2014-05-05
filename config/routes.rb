@@ -1,10 +1,13 @@
 MagSys::Application.routes.draw do
+  #get "main/index"
   #get "registration/index"
   #get "registration/register"
   #get "access/index"
   #get "access/login"
   root 'magazines#index'
   get 'admin' , :to => "access#index"
+
+  resources :main
 
   resources :orders
 
@@ -23,8 +26,9 @@ MagSys::Application.routes.draw do
   resources :clients
 
   resources :magazines do
-    resources :issues
-    resources :fields
+    resources :issues do 
+      resources :fields
+    end
   end
 
 match ':controller(/:action(/:id))', :via => [:get, :post]

@@ -1,18 +1,29 @@
 class FieldsController < ApplicationController
 
-  before_action :confirm_logged_in
+  before_action :confirm_logged_in, except: [ :index]
   before_action :set_field, only: [:show, :edit, :update, :destroy]
   
   before_action :find_magazine
-  #before_action :find_issue
+  before_action :find_issue
   # GET /fields
   # GET /fields.json
   def index
-    if params[:magazine_id]
-      @fields = Field.where :magazine_id => params[:magazine_id]
+    @fields = Field.where(:magazine_id => params[:magazine_id]).order(:height, :width)
+    
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      if @user.admin? or @user.editor?
+        render :index
+      else
+        render :index_other
+      end
     else
-      @fields = Field.all
+      render :index_other
     end
+  end
+
+  def index_other
+    @fields = Field.where(:magazine_id => params[:magazine_id]).order(:height, :width)
   end
 
   # GET /fields/1

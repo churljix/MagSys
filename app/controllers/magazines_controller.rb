@@ -5,6 +5,17 @@ class MagazinesController < ApplicationController
   # GET /magazines.json
   def index
     @magazines = Magazine.all
+
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      if @user.admin? or @user.editor?
+        render :index
+      else
+        render :index_other
+      end
+    else
+      render :index_other
+    end
   end
 
   # GET /magazines/1

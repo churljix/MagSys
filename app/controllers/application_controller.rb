@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # before_action :confirm_logged_in
 
-  private
+private
 
   def confirm_logged_in
   	unless session[:user_id]
@@ -27,7 +27,17 @@ class ApplicationController < ActionController::Base
   end
 
   def user_role
-    @user = User.find(session[:user_id])
-    #if @user.roles_list
+    if session[:user_id]
+      #@user_roles = User_roles.find(session[:user_id])
+      # if @user.admin?
+      #   session[:admin] = true
+      # elsif @user.editor?
+      #   session[:editor] = true
+      # elsif @user.accountant?
+      #   session[:accountant] = true
+      # else
+      #   session[:agent] = true
+      # end      
+    end
   end
 end

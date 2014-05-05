@@ -1,9 +1,9 @@
 <div class="page-header">
-  <%= link_to magazine_fields_path(@magazine), :class => 'btn btn-default' do %>
+  <%= link_to magazine_issue_fields_path(@magazine, @issue), :class => 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
   <% end %>
-  <%= link_to magazine_field_path(@magazine, @field), :class => 'btn btn-primary' do %>
+  <%= link_to magazine_issue_field_path(@magazine, @issue, @field), :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-info-sign"></span>
     Show
   <% end %>

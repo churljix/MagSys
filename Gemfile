@@ -40,7 +40,13 @@ end
 gem 'bcrypt', '~> 3.1.7'
 
 #Image attachment
-gem "paperclip", "~> 4.1"
+#gem "paperclip", "~> 4.1"
+
+#store
+#gem 'spree_cmd'
+
+#cart
+#gem 'carter'
 
 # Use unicorn as the app server
 # gem 'unicorn'

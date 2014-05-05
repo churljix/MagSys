@@ -1,17 +1,27 @@
 class IssuesController < ApplicationController
-  before_action :confirm_logged_in
+  before_action :confirm_logged_in, except: [ :index]
   # before_action :require_role :admin
   before_action :find_magazine
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
   # GET /issues
   # GET /issues.json
   def index
-    if params[:magazine_id]
-      @issues = Issue.where :magazine_id => params[:magazine_id]
+    @issues = Issue.where(:magazine_id => params[:magazine_id]).order(:number)
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      if @user.admin? or @user.editor?
+        render :index
+      else
+        render :index_other
+      end
     else
-      @issues = Issue.all
+      render :index_other
     end
   end
+
+   def index_other
+     @issues = Issue.where(:magazine_id => params[:magazine_id]).order(:number)
+   end
 
   # GET /issues/1
   # GET /issues/1.json

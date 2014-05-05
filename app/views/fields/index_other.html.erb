@@ -1,0 +1,30 @@
+<div class="page-header">
+  <%= link_to magazine_issues_path(@magazine), :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <%= @magazine.title %> Issues
+  <% end %>
+  <h1>Available fields</h1>
+</div>
+
+<div class="row">
+<%= content_tag_for(:tr, @fields) do |field| %>
+    <div class="col-md-3 col-sm-6 ">
+      <div class="thumbnail">
+        <div class="caption">
+          <h3><%= field.title %></h3>
+              <p><b>Height: </b><%= field.height %> cm</p>
+              <p><b>Width: </b><%= field.width %> cm</p>
+              <p><b>Price: <%= number_with_precision(field.price, :precision => 2) %> EUR</b></p>
+              <% if session[:user_id] %>
+                <p><center>
+                  <%= link_to magazine_issues_path(@magazine), :class => 'btn btn-primary' do %>          
+                  Pievienot
+                  <span class="glyphicon glyphicon-plus"></span>
+                <% end %></center>
+                </p>
+              <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

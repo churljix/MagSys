@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>Main page</h1>
+</div>
+<div class="row">
+<%= content_tag_for(:tr, @magazines) do |magazine| %>
+	<% if magazine.status == 'Y' %>
+	  <div class="col-md-3 col-sm-6 ">
+	    <div class="thumbnail">
+	      <%= image_tag magazine.picture, size: "200x160" %>
+	      <div class="caption">
+	        <h3><%= magazine.title %></h3>
+	            <p><b>Issues in a year: </b><%= magazine.issue %></p>
+	            <p><b>Prints per issue: </b><%= magazine.prints %></p>
+	            <p><b>Subscribers: </b><%= magazine.subscribers %></p>
+	            <p><b>Total readership: </b><%= magazine.readership %></p>
+	        <p><center>
+		      <%= link_to magazine_issues_path(magazine.id), :class => 'btn btn-primary' do %>
+			    
+			    Magazine issues
+			    <span class="glyphicon glyphicon-chevron-right"></span>
+			  <% end %></center>
+			</p>
+	      </div>
+	    </div>
+	  </div>
+	<% end %>
+  <% end %>
+</div>
