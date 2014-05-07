@@ -45,6 +45,12 @@ gem 'bcrypt', '~> 3.1.7'
 #store
 #gem 'spree_cmd'
 
+#date
+gem 'date_validator'
+
+#calendar
+gem 'bootstrap-datepicker-rails'
+
 #cart
 #gem 'carter'
 

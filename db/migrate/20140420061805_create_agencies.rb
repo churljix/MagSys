@@ -4,7 +4,7 @@ class CreateAgencies < ActiveRecord::Migration
       t.string :title
       t.string :reg_number
       t.string :address
-      t.string :phone
+      t.integer :phone
 
       t.timestamps
     end

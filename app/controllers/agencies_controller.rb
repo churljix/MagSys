@@ -1,5 +1,5 @@
 class AgenciesController < ApplicationController
-  before_action :confirm_logged_in
+  before_action :confirm_logged_in, except: [ :new, :create]
   before_action :set_agency, only: [:show, :edit, :update, :destroy]
 
   # GET /agencies
@@ -16,6 +16,7 @@ class AgenciesController < ApplicationController
   # GET /agencies/new
   def new
     @agency = Agency.new
+    session[:redirect_to] = request.referer
   end
 
   # GET /agencies/1/edit
@@ -26,11 +27,10 @@ class AgenciesController < ApplicationController
   # POST /agencies.json
   def create
     @agency = Agency.new(agency_params)
-
     respond_to do |format|
       if @agency.save
-        format.html { redirect_to @agency, notice: 'Agency was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @agency }
+        format.html { redirect_to session[:redirect_to], notice: 'Agency was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @agency }
       else
         format.html { render action: 'new' }
         format.json { render json: @agency.errors, status: :unprocessable_entity }

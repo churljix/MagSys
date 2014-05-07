@@ -1,4 +1,8 @@
 <div class="page-header">
+    <%= link_to main_index_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    All Magazines
+  <% end %>
   <h1><%= image_tag @magazine.picture, size: "80x100", :class => 'img-rounded"'%> Listing <%= @magazine.title %> issues </h1> 
   
 </div>

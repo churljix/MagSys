@@ -11,10 +11,10 @@ class MagazinesController < ApplicationController
       if @user.admin? or @user.editor?
         render :index
       else
-        render :index_other
+        redirect_to main_index_path
       end
     else
-      render :index_other
+      redirect_to main_index_path
     end
   end
 

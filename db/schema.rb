@@ -15,17 +15,17 @@ ActiveRecord::Schema.define(version: 20140504203712) do
 
   create_table "agencies", force: true do |t|
     t.string   "title"
-    t.string   "reg_number"
+    t.integer   "reg_number"
     t.string   "address"
-    t.string   "phone"
+    t.integer   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "clients", force: true do |t|
     t.string   "title"
-    t.string   "reg_number"
-    t.string   "phone"
+    t.integer   "reg_number"
+    t.integer   "phone"
     t.string   "contact"
     t.string   "email"
     t.datetime "created_at"

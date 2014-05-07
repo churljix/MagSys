@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :confirm_logged_in, :except => [ :show, :create, :new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_agencies
   
   # GET /users
   # GET /users.json
@@ -72,5 +73,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:username, :name, :last_name, :email, :phone, :agency_id, :password, :password_confirmation)
+    end
+
+    def set_agencies
+      @agencies = Agency.all
     end
 end
