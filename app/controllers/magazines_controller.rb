@@ -4,7 +4,7 @@ class MagazinesController < ApplicationController
   # GET /magazines
   # GET /magazines.json
   def index
-    @magazines = Magazine.all
+    @magazines = Magazine.where( :status => 'Y').order(:title)
 
     if session[:user_id]
       @user = User.find(session[:user_id])
@@ -65,7 +65,7 @@ class MagazinesController < ApplicationController
   # DELETE /magazines/1
   # DELETE /magazines/1.json
   def destroy
-    @magazine.destroy
+    @magazine.update_attribute(:status, 'N')
     respond_to do |format|
       format.html { redirect_to magazines_url }
       format.json { head :no_content }

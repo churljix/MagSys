@@ -1,7 +1,7 @@
 class Issue < ActiveRecord::Base
 
 	belongs_to :magazine
-	has_many :orders
+	has_many :orders, :dependent => :destroy
 	simple_roles
 
 	validates :magazine_id, :presence => true,

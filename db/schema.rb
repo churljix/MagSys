@@ -11,35 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504203712) do
+ActiveRecord::Schema.define(version: 20140510204516) do
 
   create_table "agencies", force: true do |t|
     t.string   "title"
-    t.integer   "reg_number"
+    t.integer  "reg_number", limit: 20
     t.string   "address"
-    t.integer   "phone"
+    t.integer  "phone",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   create_table "clients", force: true do |t|
     t.string   "title"
-    t.integer   "reg_number"
-    t.integer   "phone"
+    t.integer  "reg_number", limit: 20
+    t.integer  "phone",      limit: 255
     t.string   "contact"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   create_table "contracts", force: true do |t|
     t.integer  "agency_id"
     t.date     "date"
     t.decimal  "discount"
-    t.string   "notes"
+    t.string   "notes",           limit: 500
     t.integer  "last_updated_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "contracts", ["agency_id"], name: "index_contracts_on_agency_id"
@@ -53,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140504203712) do
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "fields", ["magazine_id"], name: "index_fields_on_magazine_id"
@@ -63,9 +67,10 @@ ActiveRecord::Schema.define(version: 20140504203712) do
     t.date     "date"
     t.date     "due_date"
     t.integer  "contract_id"
-    t.string   "note"
+    t.string   "note",        limit: 500
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "invoices", ["contract_id"], name: "index_invoices_on_contract_id"
@@ -97,7 +102,7 @@ ActiveRecord::Schema.define(version: 20140504203712) do
   create_table "messages", force: true do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.string   "text"
+    t.string   "text",         limit: 1000
     t.boolean  "status"
     t.boolean  "visible"
     t.datetime "created_at"
@@ -114,7 +119,7 @@ ActiveRecord::Schema.define(version: 20140504203712) do
     t.integer  "user_id"
     t.integer  "contract_id"
     t.string   "title"
-    t.string   "notes"
+    t.string   "notes",        limit: 500
     t.decimal  "total_amount"
     t.decimal  "remaining"
     t.decimal  "special"
@@ -135,6 +140,7 @@ ActiveRecord::Schema.define(version: 20140504203712) do
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id"
@@ -166,6 +172,7 @@ ActiveRecord::Schema.define(version: 20140504203712) do
     t.integer  "agency_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
   end
 
   add_index "users", ["agency_id"], name: "index_users_on_agency_id"

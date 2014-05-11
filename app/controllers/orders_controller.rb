@@ -14,27 +14,33 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new
+    @order = Order.new(order_params)
   end
 
-  # GET /orders/1/edit
-  def edit
-  end
 
   # POST /orders
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
+    session[:return_to] ||= request.referer
     respond_to do |format|
-      if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @order }
+      if @order.save!
+        if is_power
+          format.html { redirect_to @order, notice: 'Order was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @order }
+        else
+          format.html { redirect_to session.delete(:return_to), notice: 'Order was successfully added.' }
+          format.json { render action: 'index', status: :created, location: @order }
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # GET /orders/1/edit
+  def edit
   end
 
   # PATCH/PUT /orders/1
@@ -69,6 +75,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:issue_id, :field_id, :client_id, :user_id, :contract_id, :title, :notes, :total_amount, :remaining, :special)
+      params.require(:order).permit(:issue_id, :field_id, :client_id, :user_id, :contract_id, :title, :notes, :total_amount, :remaining, :special, :status)
     end
 end

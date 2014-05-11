@@ -1,13 +1,49 @@
-<% @page_title = "Admin Menu" %>
+<% @page_title = "Admin CP" %>
+<h1></h1>
 
-<div class="menu">
-	<h2>Admin Menu</h2>
-	<div class="identity">Logged in as:</div>
-	<ul>
-		<li><%= link_to("Manage Subjects", :controller => 'subjects') %></li>
-		<li><%= link_to("Manage Pages", :controller => 'pages') %></li>
-		<li><%= link_to("Manage Sections", :controller => 'sections') %></li>
-		<li><%= link_to("Manage Admin Users", '#') %></li>
-		<li><%= link_to("Logout", :action => 'logout') %></li>
-	</ul>
+<div class="page-header">
+  <h1>Admin CP</h1>
+</div>
+
+<div class="row">
+  <div class="col-xs-6 col-md-3">
+    <a href="magazines" class="thumbnail" size= '20x40'>
+      <h2 class="text-center">Magazines</h2>
+    </a>
+  </div>
+    <div class="col-xs-6 col-md-3">
+    <a href="clients" class="thumbnail" size= '20x40'>
+      <h2 class="text-center">Clients</h2>
+    </a>
+  </div>
+    <div class="col-xs-6 col-md-3">
+    <a href="users" class="thumbnail" size= '20x40'>
+      <h2 class="text-center">Users</h2>
+    </a>
+  </div>
+    <div class="col-xs-6 col-md-3">
+    <a href="agencies" class="thumbnail" size= '20x40'>
+      <h2 class="text-center">Agencies</h2>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3">
+    <a href="contracts" class="thumbnail" size= '20x40'>
+      <h2 class="text-center">Contracts</h2>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3">
+    <a href="invoices" class="thumbnail" size= '20x40'>
+      <h2 class="text-center">Invoices</h2>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3">
+    <a href="ordres" class="thumbnail" size= '20x40'>
+      <h2 class="text-center">Ordres</h2>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3">
+    <a href="payments" class="thumbnail" size= '20x40'>
+      <h2 class="text-center">Payments</h2>
+    </a>
+  </div>
 </div>

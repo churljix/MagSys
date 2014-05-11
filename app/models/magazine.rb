@@ -1,8 +1,9 @@
 class Magazine < ActiveRecord::Base
 
-	has_many :issues
-	has_many :fields
+	has_many :issues, :dependent => :destroy
+	has_many :fields, :dependent => :destroy
 	simple_roles
+
 
 	validates :title, :presence => true,
 					  :length => { :within => 1..255 }

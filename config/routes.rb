@@ -4,6 +4,7 @@ MagSys::Application.routes.draw do
   #get "registration/register"
   #get "access/index"
   #get "access/login"
+  #get "magazine/:magazine_id/issue/:issue_id/field/add"
   root 'main#index'
   get 'admin' , :to => "access#index"
 
@@ -27,7 +28,10 @@ MagSys::Application.routes.draw do
 
   resources :magazines do
     resources :issues do 
-      resources :fields
+      resources :fields do
+        
+      end
+
     end
   end
 

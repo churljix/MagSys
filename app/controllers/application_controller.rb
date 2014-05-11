@@ -26,10 +26,14 @@ private
     end 
   end
 
-  def user_role
+  def is_power
     if session[:user_id]
-      #@user_roles = User_roles.find(session[:user_id])
-      # if @user.admin?
+      @user_roles = User.find(session[:user_id])
+      if @user_roles.admin? or @user_roles.editor?
+        return true
+      else
+        return false
+      end
       #   session[:admin] = true
       # elsif @user.editor?
       #   session[:editor] = true

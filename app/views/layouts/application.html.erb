@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <%= favicon_link_tag 'favicon.ico' %>
   <meta charset="utf-8">
   <title>MagSys-advertising field management system</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -14,7 +15,7 @@
 
   <%= javascript_include_tag "application" %>
 
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag  "application", media: "all", "data-turbolinks-track" => true %>
 
   <%= csrf_meta_tags %>
 
@@ -52,12 +53,17 @@
         <% end %>
         <ul class="nav navbar-nav navbar-right">
           <% if session[:user_id] %>
+            <li><%= link_to("Admin CP", :controller => 'access' ,:action => 'index')  %></li>
+            <li><%= link_to("Cart", :controller => 'orders' ,:action => 'index')  %></li>
             <li><%= link_to("Logout", :controller => 'access' ,:action => 'logout') %></li>
           <% else %>
 
             <li><%= link_to("Login", :controller => 'access' ,:action => 'login') %></li>
             <li><%= link_to("Sign up", :controller => 'users' ,:action => 'new') %></li>
+
           <% end %>
+
+          
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>

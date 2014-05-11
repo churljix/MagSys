@@ -70,7 +70,7 @@ class IssuesController < ApplicationController
   # DELETE /issues/1
   # DELETE /issues/1.json
   def destroy
-    @issue.destroy
+    @issue.update_attribute(:status, 'N')
     respond_to do |format|
       format.html { redirect_to magazine_issues_url }
       format.json { head :no_content }

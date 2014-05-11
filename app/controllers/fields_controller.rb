@@ -9,7 +9,7 @@ class FieldsController < ApplicationController
   # GET /fields.json
   def index
     @fields = Field.where(:magazine_id => params[:magazine_id]).order(:height, :width)
-    
+    @order = Order.new
     if session[:user_id]
       @user = User.find(session[:user_id])
       if @user.admin? or @user.editor?
