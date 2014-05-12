@@ -32,7 +32,8 @@
                   <% end %>
                       <%= f.number_field :issue_id, :class => "hidden form-control", :value => @issue.id %>                    
                       <%= f.number_field :field_id, :class => "hidden form-control", :value => field.id %>
-                      <%= f.number_field :user_id, :class => "hidden form-control", :value => session[:user_id] %>            
+                      <%= f.number_field :user_id, :class => "hidden form-control", :value => session[:user_id] %>
+                      <%= f.number_field :client_id, :class => "hidden form-control", :value => 0 %>            
                       <%= f.text_field :total_amount, :class => "hidden form-control", :value => field.price %>                  
                       <%= f.text_field :remaining, :class => "hidden form-control", :value => field.price %>                    
                       <%= f.text_field :special, :class => "hidden form-control", :value => '1' %>

@@ -53,8 +53,12 @@
         <% end %>
         <ul class="nav navbar-nav navbar-right">
           <% if session[:user_id] %>
-            <li><%= link_to("Admin CP", :controller => 'access' ,:action => 'index')  %></li>
-            <li><%= link_to("Cart", :controller => 'orders' ,:action => 'index')  %></li>
+            
+            <% if is_power %>
+              <li><%= link_to("Admin CP", :controller => 'access' ,:action => 'index')  %></li>
+            <% else %>
+              <li><%= link_to("Cart", :controller => 'orders' ,:action => 'index')  %></li>
+            <% end %>
             <li><%= link_to("Logout", :controller => 'access' ,:action => 'logout') %></li>
           <% else %>
 
