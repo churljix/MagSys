@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :confirm_logged_in, :except => [ :show, :create, :new]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_agencies
+  before_action :is_power_user, only: [:index, :destroy]
   
   # GET /users
   # GET /users.json

@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.where( :status => 'P', :user_id => session[:user_id])
+    @orders = Order.where( :status => params[:status], :user_id => session[:user_id])
   end
 
   # GET /orders/1

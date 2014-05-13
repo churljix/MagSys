@@ -10,7 +10,7 @@ MagSys::Application.routes.draw do
 
   resources :main
 
-  resources :orders
+  resources :orders 
 
   resources :contracts
 

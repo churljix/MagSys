@@ -7,7 +7,14 @@
     <% end %>
     <h1>Listing orders</h1>
   <% else %>
-    <h1><span class="glyphicon glyphicon-shopping-cart"></span>  Your cart </h1>
+    
+    <% if params[:status] == 'A' %>
+      <h1><span class="glyphicon glyphicon-shopping-cart"></span>  Your accepted orders </h1>
+    <% elsif params[:status] == 'S' %>
+      <h1><span class="glyphicon glyphicon-shopping-cart"></span>  Your sent orders </h1>
+    <% else %>
+      <h1><span class="glyphicon glyphicon-shopping-cart"></span>  Your cart </h1>
+    <% end %>
   <% end %>
 </div>
 
@@ -47,14 +54,17 @@
             <!-- <td><%= order.remaining %></td> -->
             <!-- <td><%= order.special %></td> -->
             <!-- <td><%= link_to 'Show', order %></td> -->
-            <td>
-            <%= form_for(order, :html => { :class => "form-horizontal" }) do |t| %>
-               <%= t.hidden_field :status, :value=>"S" %>
-               <%= t.submit "Send for Review" %>
-             <% end %>
-            </td>
-        <td><%= link_to 'Edit', edit_order_path(order) %></td>
-        <td><%= link_to 'Remove', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            
+            <td><center><%= link_to 'Edit', edit_order_path(order), :class => "btn btn-default" %></center></td>
+            <% if params[:status] != 'A' %>
+              <td>
+              <%= form_for(order, :html => { :class => "form-horizontal" }) do |t| %>
+                <%= t.hidden_field :status, :value=>"S" %>
+                <center><%= t.submit "Send for Review", :class => "btn btn-default"%></center>
+              <% end %>
+              </td>
+            <td><center><%= button_to 'Remove', order, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %></center></td>
+        <% end %>
       <% end %>
     </tbody>
   </table>

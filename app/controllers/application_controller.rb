@@ -45,4 +45,16 @@ private
       # end      
     end
   end
+
+  def is_power_user
+    if session[:user_id]
+      @user_roles = User.find(session[:user_id])
+      if @user_roles.admin? or @user_roles.editor?
+        return true
+      else
+        redirect_to(user_path(:id => session[:user_id]))
+        return false
+      end
+    end
+  end
 end

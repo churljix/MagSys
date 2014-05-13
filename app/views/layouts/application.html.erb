@@ -46,18 +46,18 @@
       <div class="collapse navbar-collapse">
         <% if session[:user_id] %>
         <ul class="nav navbar-nav">
-          <li class="<%= 'active' if params[:controller] == 'magazines' %>"><a href="/magazines">Magazines</a></li>
+          <!-- <li class="<%= 'active' if params[:controller] == 'magazines' %>"><a href="/magazines">Magazines</a></li>
           <li class="<%= 'active' if params[:controller] == 'issues' %>"><a href="/issues">Issues</a></li>
-          <li class="<%= 'active' if params[:controller] == 'fields' %>"><a href="/fields">Fields</a></li>
+          <li class="<%= 'active' if params[:controller] == 'fields' %>"><a href="/fields">Fields</a></li> -->
         </ul>
         <% end %>
         <ul class="nav navbar-nav navbar-right">
           <% if session[:user_id] %>
-            
+            <li><%= link_to("Profile", :controller => 'users' ,:action => 'show', :id => session[:user_id]) %></li>
             <% if is_power %>
               <li><%= link_to("Admin CP", :controller => 'access' ,:action => 'index')  %></li>
             <% else %>
-              <li><%= link_to("Cart", :controller => 'orders' ,:action => 'index')  %></li>
+              <li><%= link_to("Cart", :controller => 'orders' ,:action => 'index', status: 'P')  %></li>
             <% end %>
             <li><%= link_to("Logout", :controller => 'access' ,:action => 'logout') %></li>
           <% else %>
@@ -70,10 +70,10 @@
           
 
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
+              <li><%= link_to("Sent", :controller => 'orders' ,:action => 'index', status: 'S') %></li>
+              <li><%= link_to("Accepted", :controller => 'orders' ,:action => 'index', status: 'A') %></li>
               <li><a href="#">Something else here</a></li>
               <li class="divider"></li>
               <li><a href="#">Separated link</a></li>
