@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   # DELETE /messages/1.json
   def destroy
-    @message.destroy
+    @message.update_attribute(:status, 'N')
     respond_to do |format|
       format.html { redirect_to messages_url }
       format.json { head :no_content }

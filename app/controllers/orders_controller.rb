@@ -4,7 +4,11 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.where( :status => params[:status], :user_id => session[:user_id])
+    if is_power
+      @orders = Order.all
+    else
+      @orders = Order.where( :status => params[:status], :user_id => session[:user_id])
+    end
   end
 
   # GET /orders/1

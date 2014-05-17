@@ -57,4 +57,9 @@ private
       end
     end
   end
+
+
+  def set_agencies
+      @agencies = Agency.all
+    end
 end

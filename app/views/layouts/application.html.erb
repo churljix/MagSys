@@ -56,8 +56,18 @@
             <li><%= link_to("Profile", :controller => 'users' ,:action => 'show', :id => session[:user_id]) %></li>
             <% if is_power %>
               <li><%= link_to("Admin CP", :controller => 'access' ,:action => 'index')  %></li>
-            <% else %>
+            <% elsif !is_power %>
               <li><%= link_to("Cart", :controller => 'orders' ,:action => 'index', status: 'P')  %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to("Sent", :controller => 'orders' ,:action => 'index', status: 'S') %></li>
+                  <li><%= link_to("Accepted", :controller => 'orders' ,:action => 'index', status: 'A') %></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li> 
             <% end %>
             <li><%= link_to("Logout", :controller => 'access' ,:action => 'logout') %></li>
           <% else %>
@@ -66,19 +76,6 @@
             <li><%= link_to("Sign up", :controller => 'users' ,:action => 'new') %></li>
 
           <% end %>
-
-          
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to("Sent", :controller => 'orders' ,:action => 'index', status: 'S') %></li>
-              <li><%= link_to("Accepted", :controller => 'orders' ,:action => 'index', status: 'A') %></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li> 
 
         </ul>
       </div>

@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
+    @user.update_attribute(:status, 'N')
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
@@ -76,7 +76,4 @@ class UsersController < ApplicationController
       params.require(:user).permit(:username, :name, :last_name, :email, :phone, :agency_id, :password, :password_confirmation)
     end
 
-    def set_agencies
-      @agencies = Agency.all
-    end
 end

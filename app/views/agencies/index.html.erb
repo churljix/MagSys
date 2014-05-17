@@ -1,7 +1,12 @@
 <div class="page-header">
+    
   <%= link_to new_agency_path, :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     New Agency
+  <% end %>
+  <%= link_to admin_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Admin CP
   <% end %>
   <h1>Listing agencies</h1>
 </div>
@@ -14,7 +19,6 @@
             <th>Reg number</th>
             <th>Address</th>
             <th>Phone</th>
-            <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -23,10 +27,9 @@
     <tbody>
       <%= content_tag_for(:tr, @agencies) do |agency| %>
             <td><%= agency.title %></td>
-            <td><%= agency.reg_number %></td>
+            <td><% if agency.reg_number != 0 %> <%= agency.reg_number %> <% end %></td>
             <td><%= agency.address %></td>
-            <td><%= agency.phone %></td>
-            <td><%= link_to 'Show', agency %></td>
+            <td><% if agency.phone != 0 %><%= agency.phone %><% end %></td>
         <td><%= link_to 'Edit', edit_agency_path(agency) %></td>
         <td><%= link_to 'Destroy', agency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>

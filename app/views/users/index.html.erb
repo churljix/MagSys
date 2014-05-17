@@ -1,7 +1,14 @@
 <div class="page-header">
-  <%= link_to new_user_path, :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    New User
+  <% if !is_power and session[:user_id].nil? %>
+
+    <%= link_to new_user_path, :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      New User
+    <% end %>
+  <% end %>
+  <%= link_to admin_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Admin CP
   <% end %>
   <h1>Listing users</h1>
 </div>
@@ -16,7 +23,6 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Agency</th>
-            <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -29,8 +35,7 @@
             <td><%= user.last_name %></td>
             <td><%= user.email %></td>
             <td><%= user.phone %></td>
-            <td><%= user.agency_id %></td>
-            <td><%= link_to 'Show', user %></td>
+            <td><%= user.agency.title %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>

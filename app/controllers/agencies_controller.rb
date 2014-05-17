@@ -55,7 +55,7 @@ class AgenciesController < ApplicationController
   # DELETE /agencies/1
   # DELETE /agencies/1.json
   def destroy
-    @agency.destroy
+    @agency.update_attribute(:status, 'N')
     respond_to do |format|
       format.html { redirect_to agencies_url }
       format.json { head :no_content }

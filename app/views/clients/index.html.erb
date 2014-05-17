@@ -3,6 +3,10 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Client
   <% end %>
+  <%= link_to admin_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Admin CP
+  <% end %>
   <h1>Listing clients</h1>
 </div>
 
@@ -15,7 +19,6 @@
             <th>Phone</th>
             <th>Contact</th>
             <th>Email</th>
-            <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -28,7 +31,6 @@
             <td><%= client.phone %></td>
             <td><%= client.contact %></td>
             <td><%= client.email %></td>
-            <td><%= link_to 'Show', client %></td>
         <td><%= link_to 'Edit', edit_client_path(client) %></td>
         <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>

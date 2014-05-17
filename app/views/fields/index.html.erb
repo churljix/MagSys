@@ -18,7 +18,6 @@
             <th>Height</th>
             <th>Width</th>
             <th>Price</th>
-            <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -30,7 +29,6 @@
             <td><%= field.height %></td>
             <td><%= field.width %></td>
             <td><%= field.price %></td>
-            <td><%= link_to 'Show', magazine_issue_field_path(@magazine, @issue, field) %></td>
         <td><%= link_to 'Edit', edit_magazine_issue_field_path(@magazine, @issue, field) %></td>
         <td><%= link_to 'Destroy', magazine_issue_field_path(@magazine, @issue, field), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>

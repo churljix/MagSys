@@ -1,6 +1,7 @@
 class ContractsController < ApplicationController
   before_action :set_contract, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  before_action :set_agencies
   # GET /contracts
   # GET /contracts.json
   def index
@@ -54,7 +55,7 @@ class ContractsController < ApplicationController
   # DELETE /contracts/1
   # DELETE /contracts/1.json
   def destroy
-    @contract.destroy
+    @contract.update_attribute(:status, 'N')
     respond_to do |format|
       format.html { redirect_to contracts_url }
       format.json { head :no_content }
@@ -69,6 +70,7 @@ class ContractsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contract_params
-      params.require(:contract).permit(:agency_id, :date, :discount, :notes, :last_updated_by)
+      params.require(:contract).permit(:agency_id, :date, :discount, :notes, :user_id)
     end
+
 end

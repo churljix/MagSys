@@ -5,11 +5,11 @@ class CreateContracts < ActiveRecord::Migration
       t.date :date
       t.decimal :discount
       t.string :notes
-      t.integer :last_updated_by
+      t.integer :user_id
 
       t.timestamps
     end
     add_index(:contracts, :agency_id)
-    add_index(:contracts, :last_updated_by)
+    add_index(:contracts, :user_id)
   end
 end

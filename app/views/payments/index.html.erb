@@ -3,6 +3,10 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Payment
   <% end %>
+  <%= link_to admin_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Admin CP
+  <% end %>
   <h1>Listing payments</h1>
 </div>
 
@@ -13,7 +17,6 @@
             <th>Invoice</th>
             <th>Amount</th>
             <th>Date</th>
-            <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -24,7 +27,6 @@
             <td><%= payment.invoice_id %></td>
             <td><%= payment.amount %></td>
             <td><%= payment.date %></td>
-            <td><%= link_to 'Show', payment %></td>
         <td><%= link_to 'Edit', edit_payment_path(payment) %></td>
         <td><%= link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>

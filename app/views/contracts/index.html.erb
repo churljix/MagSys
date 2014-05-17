@@ -3,6 +3,10 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Contract
   <% end %>
+  <%= link_to admin_path, :class => 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    Admin CP
+  <% end %>
   <h1>Listing contracts</h1>
 </div>
 
@@ -10,12 +14,12 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+            <th>#</th>
             <th>Agency</th>
             <th>Date</th>
             <th>Discount</th>
             <th>Notes</th>
             <th>Last updated by</th>
-            <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -23,12 +27,12 @@
 
     <tbody>
       <%= content_tag_for(:tr, @contracts) do |contract| %>
-            <td><%= contract.agency_id %></td>
+            <td><%= contract.id %></td>
+            <td><%= contract.agency.title %></td>
             <td><%= contract.date %></td>
             <td><%= contract.discount %></td>
             <td><%= contract.notes %></td>
-            <td><%= contract.last_updated_by %></td>
-            <td><%= link_to 'Show', contract %></td>
+            <td><%= contract.user.username %></td>
         <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
         <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>

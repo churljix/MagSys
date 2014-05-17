@@ -54,7 +54,7 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1
   # DELETE /invoices/1.json
   def destroy
-    @invoice.destroy
+    @invoice.update_attribute(:status, 'N')
     respond_to do |format|
       format.html { redirect_to invoices_url }
       format.json { head :no_content }

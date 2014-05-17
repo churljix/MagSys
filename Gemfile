@@ -40,7 +40,7 @@ end
 gem 'bcrypt', '~> 3.1.7'
 
 #Image attachment
-#gem "paperclip", "~> 4.1"
+gem 'carrierwave'
 
 #store
 #gem 'spree_cmd'

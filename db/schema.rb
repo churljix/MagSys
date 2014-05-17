@@ -39,14 +39,14 @@ ActiveRecord::Schema.define(version: 20140510204516) do
     t.date     "date"
     t.decimal  "discount"
     t.string   "notes",           limit: 500
-    t.integer  "last_updated_by"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
   end
 
   add_index "contracts", ["agency_id"], name: "index_contracts_on_agency_id"
-  add_index "contracts", ["last_updated_by"], name: "index_contracts_on_last_updated_by"
+  add_index "contracts", ["user_id"], name: "index_contracts_on_user_id"
 
   create_table "fields", force: true do |t|
     t.string   "title"

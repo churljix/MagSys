@@ -4,6 +4,7 @@ class Magazine < ActiveRecord::Base
 	has_many :fields, :dependent => :destroy
 	simple_roles
 
+  mount_uploader :picture, PictureUploader
 
 	validates :title, :presence => true,
 					  :length => { :within => 1..255 }
