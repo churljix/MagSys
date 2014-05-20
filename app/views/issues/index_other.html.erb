@@ -29,3 +29,6 @@
   <% end %>
   <% end %>
 </div>
+<center>
+  <%= will_paginate @issues, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
+</center>

@@ -8,11 +8,11 @@ class FieldsController < ApplicationController
   # GET /fields
   # GET /fields.json
   def index
-    @fields = Field.where(:magazine_id => params[:magazine_id]).order(:height, :width)
+    @fields = Field.where(:magazine_id => params[:magazine_id]).order(:height, :width).paginate(:page => params[:page], :per_page => 10)
     @order = Order.new
     if session[:user_id]
       @user = User.find(session[:user_id])
-      if @user.admin? or @user.editor?
+      if is_power
         render :index
       else
         render :index_other
@@ -23,7 +23,7 @@ class FieldsController < ApplicationController
   end
 
   def index_other
-    @fields = Field.where(:magazine_id => params[:magazine_id]).order(:height, :width)
+    @fields = Field.where(:magazine_id => params[:magazine_id]).order(:height, :width).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /fields/1

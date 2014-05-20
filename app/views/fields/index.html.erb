@@ -34,4 +34,7 @@
       <% end %>
     </tbody>
   </table>
+  <center>
+  <%= will_paginate @fields, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
+  </center>
 </div>

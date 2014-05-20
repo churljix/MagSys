@@ -1,0 +1,26 @@
+<div id="myModal" class="modal fade bs-example-modal-lg">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Orders to Contract</h4>
+      </div>
+      <%= form_tag add_contracts_path, :method => :put  do %>
+      <div class="modal-body">
+        <%= puts :con %>
+        <% for order in @orders %>
+          <li>
+          <%= check_box_tag "orders_id[]", order.id%>
+          <%= order.id %>
+          </li>
+          <% end %>
+        <%= submit_tag "Pievienot" %>
+      <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag "Pievienot", :class=>"btn btn-primary" %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

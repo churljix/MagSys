@@ -5,9 +5,9 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     if is_power
-      @orders = Order.all
+      @orders = Order.all.paginate(:page => params[:page], :per_page => 10)
     else
-      @orders = Order.where( :status => params[:status], :user_id => session[:user_id])
+      @orders = Order.where( :status => params[:status], :user_id => session[:user_id]).paginate(:page => params[:page], :per_page => 10)
     end
   end
 

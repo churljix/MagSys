@@ -51,8 +51,10 @@ gem 'date_validator'
 #calendar
 gem 'bootstrap-datepicker-rails'
 
-#cart
-#gem 'carter'
+#pagination
+gem 'will_paginate', '~> 3.0'
+
+gem 'will_paginate-bootstrap'
 
 # Use unicorn as the app server
 # gem 'unicorn'

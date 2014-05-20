@@ -12,7 +12,11 @@ MagSys::Application.routes.draw do
 
   resources :orders 
 
-  resources :contracts
+  resources :contracts do
+      collection do
+      put :add
+    end
+  end
 
   resources :messages
 
@@ -34,6 +38,7 @@ MagSys::Application.routes.draw do
 
     end
   end
+
 
 match ':controller(/:action(/:id))', :via => [:get, :post]
 

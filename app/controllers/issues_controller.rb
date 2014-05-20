@@ -6,10 +6,10 @@ class IssuesController < ApplicationController
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.where(:magazine_id => params[:magazine_id]).order(:number)
+    @issues = Issue.where(:magazine_id => params[:magazine_id]).order(:number).paginate(:page => params[:page], :per_page => 10)
     if session[:user_id]
       @user = User.find(session[:user_id])
-      if @user.admin? or @user.editor?
+      if is_power
         render :index
       else
         render :index_other
@@ -20,7 +20,7 @@ class IssuesController < ApplicationController
   end
 
    def index_other
-     @issues = Issue.where(:magazine_id => params[:magazine_id]).order(:number)
+     @issues = Issue.where(:magazine_id => params[:magazine_id]).order(:number).paginate(:page => params[:page], :per_page => 10)
    end
 
   # GET /issues/1

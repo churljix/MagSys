@@ -42,4 +42,7 @@
       <% end %>
     </tbody>
   </table>
+  <center>
+  <%= will_paginate @magazines, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
+  </center>
 </div>

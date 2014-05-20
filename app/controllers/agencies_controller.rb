@@ -5,7 +5,7 @@ class AgenciesController < ApplicationController
   # GET /agencies
   # GET /agencies.json
   def index
-    @agencies = Agency.all
+    @agencies = Agency.all.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /agencies/1

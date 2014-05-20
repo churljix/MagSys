@@ -2,10 +2,11 @@ class ContractsController < ApplicationController
   before_action :set_contract, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
   before_action :set_agencies
+  before_action :set_orders
   # GET /contracts
   # GET /contracts.json
   def index
-    @contracts = Contract.all
+    @contracts = Contract.all.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /contracts/1
@@ -20,6 +21,11 @@ class ContractsController < ApplicationController
 
   # GET /contracts/1/edit
   def edit
+  end
+
+  def add
+    Order.update_all([:contract_id => 4], :id => params[:order_id])    
+    redirect_to contracts_url
   end
 
   # POST /contracts

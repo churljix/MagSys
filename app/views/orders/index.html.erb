@@ -72,4 +72,7 @@
       <% end %>
     </tbody>
   </table>
+  <center>
+  <%= will_paginate @orders, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
+  </center>
 </div>

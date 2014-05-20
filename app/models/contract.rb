@@ -6,7 +6,7 @@ class Contract < ActiveRecord::Base
 	belongs_to :user
 
 	validates :agency_id, :presence => true
-	validates :date, :presence => true
+	#validates :date, :presence => true
 	validates :discount, :presence => true,
 						 :inclusion => { :in => 1..100 },
 						 numericality: true

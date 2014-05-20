@@ -20,8 +20,7 @@
             <th>Discount</th>
             <th>Notes</th>
             <th>Last updated by</th>
-        <th></th>
-        <th></th>
+
       </tr>
     </thead>
 
@@ -35,7 +34,17 @@
             <td><%= contract.user.username %></td>
         <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
         <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Add Orders
+              </button></td>
+              <%= render 'orders', :locals => {:con => 2}%>
       <% end %>
     </tbody>
   </table>
+  <center>
+  <%= will_paginate @contracts, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
+  </center>
 </div>
+
+<%= render 'orders' %>
+

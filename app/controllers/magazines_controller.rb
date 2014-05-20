@@ -4,11 +4,11 @@ class MagazinesController < ApplicationController
   # GET /magazines
   # GET /magazines.json
   def index
-    @magazines = Magazine.where( :status => 'Y').order(:title)
+    @magazines = Magazine.where( :status => 'Y').order(:title).paginate(:page => params[:page], :per_page => 10)
 
     if session[:user_id]
       @user = User.find(session[:user_id])
-      if @user.admin? or @user.editor?
+      if is_power
         render :index
       else
         redirect_to main_index_path

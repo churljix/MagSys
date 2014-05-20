@@ -62,4 +62,11 @@ private
   def set_agencies
       @agencies = Agency.all
     end
+
+    def set_users
+      @users = User.all
+    end
+  def set_orders
+      @orders = Order.all
+  end  
 end
