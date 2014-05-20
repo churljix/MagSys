@@ -14,7 +14,7 @@ class Invoice < ActiveRecord::Base
   	validates :due_date, 	:presence => true,
   							date: true,
   							date: { after: :date }
-  	validates :contact_id, :presence => true,
+  	validates :contract_id, :presence => true,
   							numericality: true					
-  	validates :note, :lenght => { :within => 0..500 }		
+  	#validates :note, :lenght => { :within => 0..500 }		
 end

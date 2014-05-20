@@ -3,6 +3,7 @@ class Magazine < ActiveRecord::Base
 	has_many :issues, :dependent => :destroy
 	has_many :fields, :dependent => :destroy
 	simple_roles
+  :dependent => :destroy
 
   mount_uploader :picture, PictureUploader
 
