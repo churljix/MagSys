@@ -34,10 +34,10 @@
             <td><%= contract.user.username %></td>
         <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
         <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-         <td><button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+         <td><button class="btn btn-primary btn-orders" data-pk='<%= contract.id %>' data-toggle="modal" data-target="#myModal">
                 Add Orders
               </button></td>
-              <%= render 'orders', :locals => {:con => 2}%>
+              <%= render 'orders' %>
       <% end %>
     </tbody>
   </table>
@@ -45,6 +45,4 @@
   <%= will_paginate @contracts, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
   </center>
 </div>
-
-<%= render 'orders' %>
 

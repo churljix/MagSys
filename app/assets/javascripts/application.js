@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-datepicker
+
+    $(document).ready(function(){
+      $('.datepicker').datepicker({
+        todayBtn: "linked",
+        format: "yyyy-dd-mm",
+        orientation: "auto left",
+        autoclose: true,
+        language: "en"
+      });
+
+      $('.btn-orders').click(function() {
+          $('#con_pk').attr('value', $(this).attr('data-pk'));
+      });
+  	});

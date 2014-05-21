@@ -24,7 +24,7 @@ class ContractsController < ApplicationController
   end
 
   def add
-    Order.update_all([:contract_id => 4], :id => params[:order_id])    
+    Order.where(:id => params[:orders_id]).update_all(:contract_id => params[:con_pk])
     redirect_to contracts_url
   end
 
