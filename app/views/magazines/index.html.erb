@@ -20,10 +20,7 @@
             <th>Subscribers</th>
             <th>Readership</th>
             <th>Picture</th>
-            
-        <th></th>
-        <th></th>
-        <th></th>
+
       </tr>
     </thead>
 
@@ -34,11 +31,11 @@
             <td><%= magazine.prints %></td>
             <td><%= magazine.subscribers %></td>
             <td><%= magazine.readership %></td>
-            <td><%= image_tag magazine.picture, size: "80x100" %></td>
+            <td class ='text-center'><%= image_tag magazine.picture, size: "80x100" %></td>
             
-            <td><%= link_to 'Magazine issues', magazine_issues_path(magazine.id) %></td>
-        <td><%= link_to 'Edit', edit_magazine_path(magazine) %></td>
-        <td><%= link_to 'Destroy', magazine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class ='text-center'><%= link_to 'Magazine issues', magazine_issues_path(magazine.id) %></td>
+        <td class ='text-center'><%= link_to 'Edit', edit_magazine_path(magazine) %></td>
+        <td class ='text-center'><%= link_to 'Destroy', magazine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tbody>
   </table>

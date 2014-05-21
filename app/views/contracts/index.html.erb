@@ -37,7 +37,7 @@
          <td><button class="btn btn-primary btn-orders" data-pk='<%= contract.id %>' data-toggle="modal" data-target="#myModal">
                 Add Orders
               </button></td>
-              <%= render 'orders' %>
+              
       <% end %>
     </tbody>
   </table>
@@ -45,4 +45,4 @@
   <%= will_paginate @contracts, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
   </center>
 </div>
-
+<div><%= render 'orders' %></div>

@@ -43,6 +43,8 @@
         <% end %>
         <ul class="nav navbar-nav navbar-right">
           <% if session[:user_id] %>
+            
+            <li><a href='/messages'> <span class="glyphicon glyphicon-envelope"></span> </a></li>
             <li><%= link_to("Profile", :controller => 'users' ,:action => 'show', :id => session[:user_id]) %></li>
             <% if is_power %>
               <li><%= link_to("Admin CP", :controller => 'access' ,:action => 'index')  %></li>

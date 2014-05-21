@@ -7,14 +7,13 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
-  <h1>Show magazine</h1>
+  <h1><%= @magazine.title %> magazine</h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Title:</dt>
-  <dd><%= @magazine.title %></dd>
+<%= image_tag @magazine.picture, :class => 'col-md-3' %>
 
-  <dt>Issue:</dt>
+<dl class="dl-horizontal col-md-1">
+  <dt>Issues:</dt>
   <dd><%= @magazine.issue %></dd>
 
   <dt>Prints:</dt>
@@ -27,9 +26,6 @@
   <dd><%= @magazine.readership %></dd>
 
   <dt>Picture:</dt>
-  <dd><%= image_tag @magazine.picture %></dd>
-
-  <dt>Status:</dt>
-  <dd><%= @magazine.status %></dd>
+  <dd></dd>
 
 </dl>

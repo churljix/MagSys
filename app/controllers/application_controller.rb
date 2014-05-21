@@ -67,6 +67,6 @@ private
       @users = User.all
     end
   def set_orders
-      @orders = Order.all
+      @orders = Order.where(:contract_id => nil)
   end  
 end
