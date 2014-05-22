@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all.paginate(:page => params[:page], :per_page => 10)
+    @messages = Message.where(:status => 'S').paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /messages/1
@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   # DELETE /messages/1.json
   def destroy
-    @message.update_attribute(:status, 'N')
+    @message.update_attribute(:status, 'D')
     respond_to do |format|
       format.html { redirect_to messages_url }
       format.json { head :no_content }

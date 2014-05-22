@@ -6,7 +6,7 @@ class ContractsController < ApplicationController
   # GET /contracts
   # GET /contracts.json
   def index
-    @contracts = Contract.all.paginate(:page => params[:page], :per_page => 10)
+    @contracts = Contract.where(:status => 'Y').paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /contracts/1

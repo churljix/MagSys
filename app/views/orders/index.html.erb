@@ -61,12 +61,16 @@
             
             <td><center><%= link_to 'Edit', edit_order_path(order), :class => "btn btn-default" %></center></td>
             <% if params[:status] != 'A' %>
+              <% if params[:status] == 'P' %>
               <td>
-              <%= form_for(order, :html => { :class => "form-horizontal" }) do |t| %>
-                <%= t.hidden_field :status, :value=>"S" %>
-                <center><%= t.submit "Send for Review", :class => "btn btn-default"%></center>
-              <% end %>
+                
+                  <%= form_for(order, :html => { :class => "form-horizontal" }) do |t| %>
+                    <%= t.hidden_field :status, :value=>"S" %>
+                    <center><%= t.submit "Send for Review", :class => "btn btn-default"%></center>
+                  <% end %>
+                
               </td>
+              <% end %>
             <td><center><%= button_to 'Remove', order, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %></center></td>
         <% end %>
       <% end %>

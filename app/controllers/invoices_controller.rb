@@ -4,7 +4,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.all.paginate(:page => params[:page], :per_page => 10)
+    @invoices = Invoice.where(:status => 'Y').paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /invoices/1

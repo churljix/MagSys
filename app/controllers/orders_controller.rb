@@ -1,11 +1,13 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  before_action :set_issues
+  before_action :set_clients
   # GET /orders
   # GET /orders.json
   def index
     if is_power
-      @orders = Order.all.paginate(:page => params[:page], :per_page => 10)
+      @orders = Order.where.not(status: 'D').paginate(:page => params[:page], :per_page => 10)
     else
       @orders = Order.where( :status => params[:status], :user_id => session[:user_id]).paginate(:page => params[:page], :per_page => 10)
     end
@@ -52,7 +54,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to :back, notice: 'Order was successfully sent.' }
+        format.html { redirect_to orders_path(:status => 'S'), notice: 'Order was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

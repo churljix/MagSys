@@ -60,13 +60,37 @@ private
 
 
   def set_agencies
-      @agencies = Agency.all
+      @agencies = Agency.where(:status => 'Y')
     end
 
     def set_users
-      @users = User.all
+      @users = User.where(:status => 'Y')
     end
   def set_orders
-      @orders = Order.where(:contract_id => nil)
-  end  
+      @orders = Order.where(:contract_id => nil).where.not(status: 'D')
+  end
+  def set_clients
+      @clients = Client.where(:status => 'Y')
+  end
+  def set_contracts
+      @contracts = Contract.where(:status => 'Y')
+  end
+  def set_fields
+      @fields = Field.where(:status => 'Y')
+  end
+  def set_invoices
+      @invoices = Invoice.where(:status => 'Y')
+  end
+  def set_magazines
+      @magazines = Magazine.where(:status => 'Y')
+  end 
+  def set_issues
+      @issues = Issue.where(:status => 'Y')
+  end 
+  # def set_messages
+  #     @messages = Message.where(:status => 'Y')
+  # end 
+  def set_payments
+      @payments = Payment.where(:status => 'Y')
+  end 
 end

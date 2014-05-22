@@ -6,48 +6,51 @@
   <h1>Available fields</h1>
 </div>
 
-<div class="row">
-<%= content_tag_for(:tr, @fields) do |field| %>
-    <div class="col-md-3 col-sm-6 ">
-      <div class="thumbnail">
-        <div class="caption">
-          <h3><%= field.title %></h3>
-              <p><b>Height: </b><%= field.height %> cm</p>
-              <p><b>Width: </b><%= field.width %> cm</p>
-              <p><b>Price: <%= number_with_precision(field.price, :precision => 2) %> EUR</b></p>
-              <% if session[:user_id] %>
+<% if @fields.nil? || @fields.empty? %>
+  <h3> No existing fields </h3>        
+<% else %>
+  <div class="row">
+  <%= content_tag_for(:tr, @fields) do |field| %>
+      <div class="col-md-3 col-sm-6 ">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3><%= field.title %></h3>
+                <p><b>Height: </b><%= field.height %> cm</p>
+                <p><b>Width: </b><%= field.width %> cm</p>
+                <p><b>Price: <%= number_with_precision(field.price, :precision => 2) %> EUR</b></p>
+                <% if session[:user_id] %>
 
-                <%= form_for(@order, controller: 'orders', action: 'create', :html => { :class => "form-horizontal" }) do |f| %>
-                  <% if @order.errors.any? %>
-                    <div class="alert alert-danger alert-dismissable">
-                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                      <h4><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h4>
+                  <%= form_for(@order, controller: 'orders', action: 'create', :html => { :class => "form-horizontal" }) do |f| %>
+                    <% if @order.errors.any? %>
+                      <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h4><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h4>
 
-                      <ul>
-                      <% @order.errors.full_messages.each do |msg| %>
-                        <li><%= msg %></li>
-                      <% end %>
-                      </ul>
-                    </div>
+                        <ul>
+                        <% @order.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+                        <%= f.number_field :issue_id, :class => "hidden form-control", :value => @issue.id %>                    
+                        <%= f.number_field :field_id, :class => "hidden form-control", :value => field.id %>
+                        <%= f.number_field :user_id, :class => "hidden form-control", :value => session[:user_id] %>
+                        <%= f.number_field :client_id, :class => "hidden form-control", :value => 0 %>            
+                        <%= f.text_field :total_amount, :class => "hidden form-control", :value => field.price %>                  
+                        <%= f.text_field :remaining, :class => "hidden form-control", :value => field.price %>                    
+                        <%= f.text_field :special, :class => "hidden form-control", :value => '1' %>
+                        <%= f.text_field :status, :class => "hidden form-control", :value => 'P' %>                
+                    <center><%= f.submit "Add to Cart", :class => "show btn btn-primary "  %></center>
                   <% end %>
-                      <%= f.number_field :issue_id, :class => "hidden form-control", :value => @issue.id %>                    
-                      <%= f.number_field :field_id, :class => "hidden form-control", :value => field.id %>
-                      <%= f.number_field :user_id, :class => "hidden form-control", :value => session[:user_id] %>
-                      <%= f.number_field :client_id, :class => "hidden form-control", :value => 0 %>            
-                      <%= f.text_field :total_amount, :class => "hidden form-control", :value => field.price %>                  
-                      <%= f.text_field :remaining, :class => "hidden form-control", :value => field.price %>                    
-                      <%= f.text_field :special, :class => "hidden form-control", :value => '1' %>
-                      <%= f.text_field :status, :class => "hidden form-control", :value => 'P' %>                
-                  <center><%= f.submit "Add to Cart", :class => "show btn btn-primary "  %></center>
-                <% end %>
 
-              <% end %>
+                <% end %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
-<center>
-  <%= will_paginate @fields, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
-</center>
-
+    <% end %>
+  </div>
+  <center>
+    <%= will_paginate @fields, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
+  </center>
+<% end %>
