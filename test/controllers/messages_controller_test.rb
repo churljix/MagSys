@@ -18,7 +18,7 @@ class MessagesControllerTest < ActionController::TestCase
 
   test "should create message" do
     assert_difference('Message.count') do
-      post :create, message: { recipient_id: @message.recipient_id, sender_id: @message.sender_id, status: @message.status, text: @message.text, visible: @message.visible }
+      post :create, message: { recipient_id: @message.recipient_id, user_id: @message.user_id, status: @message.status, text: @message.text, visible: @message.visible }
     end
 
     assert_redirected_to message_path(assigns(:message))
@@ -35,7 +35,7 @@ class MessagesControllerTest < ActionController::TestCase
   end
 
   test "should update message" do
-    patch :update, id: @message, message: { recipient_id: @message.recipient_id, sender_id: @message.sender_id, status: @message.status, text: @message.text, visible: @message.visible }
+    patch :update, id: @message, message: { recipient_id: @message.recipient_id, user_id: @message.user_id, status: @message.status, text: @message.text, visible: @message.visible }
     assert_redirected_to message_path(assigns(:message))
   end
 

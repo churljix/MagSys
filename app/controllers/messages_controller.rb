@@ -1,15 +1,18 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  before_action :set_power_users, only: [:new]
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.where(:status => 'S').paginate(:page => params[:page], :per_page => 10)
+    @messages = Message.where(:status => 'S').paginate(:page => params[:page], :per_page => 10).where(:recipient_id => session[:user_id])
   end
 
   # GET /messages/1
   # GET /messages/1.json
   def show
+    @message.visible = false 
+    @message.save
   end
 
   # GET /messages/new
@@ -69,6 +72,15 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:sender_id, :recipient_id, :text, :status, :visible)
+      params.require(:message).permit(:user_id, :recipient_id, :text, :status, :visible)
+    end
+
+    def set_power_users
+      if is_power
+        @users = User.where(:status => 'Y').where.not(id: session[:user_id] )
+      else
+        @power_users = UserRole.select('user_id').where(:role_id => [4,2])
+        @users = User.where(:status => 'Y').where(:id => @power_users)
+      end
     end
 end

@@ -14,27 +14,28 @@
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
+            <th>Recieved at</th>
             <th>Sender</th>
-            <th>Recipient</th>
-            <th>Text</th>
-            <th>Status</th>
-            <th>Visible</th>
-            <th></th>
-        <th></th>
-        <th></th>
+            <th>Message</th>          
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @messages) do |message| %>
-            <td><%= message.sender_id %></td>
-            <td><%= message.recipient_id %></td>
-            <td><%= message.text %></td>
-            <td><%= message.status %></td>
-            <td><%= message.visible %></td>
-            <td><%= link_to 'Show', message %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% if message.visible%>
+              
+                <td><strong><%= message.created_at.strftime("%T %F")  %></strong></td>
+                <td><strong><%= message.user.username %></strong></td>
+                <td><strong><%= message.text[0..19] %>. . .</strong></td>            
+                
+            <% else %>
+              <td><%= message.created_at.strftime("%T %F")  %></td>
+              <td><%= message.user.username %></td>            
+              <td><%= message.text[0..19] %>. . .</td>  
+            <% end %>
+          <td><%= link_to 'Read', message %></td>
+          <td><%= link_to 'Reply', new_message_path(:recipient_id => message.recipient_id) %></td>
+          <td><%= link_to 'Delete', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
       <% end %>
     </tbody>
   </table>

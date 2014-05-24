@@ -43,8 +43,13 @@
         <% end %>
         <ul class="nav navbar-nav navbar-right">
           <% if session[:user_id] %>
-            
-            <li><a href='/messages'> <span class="glyphicon glyphicon-envelope"></span> </a></li>
+            <li><p class="navbar-text">Hello, <%= @user_login.username %></p></li>
+            <li><a href='/messages'> <span class="glyphicon glyphicon-envelope"></span>
+                  <% if @un_messages != 0 %> 
+                    (<%= @un_messages %>) 
+                  <% end %>
+                </a>
+            </li>
             <li><%= link_to("Profile", :controller => 'users' ,:action => 'show', :id => session[:user_id]) %></li>
             <% if is_power %>
               <li><%= link_to("Admin CP", :controller => 'access' ,:action => 'index')  %></li>
@@ -55,9 +60,6 @@
                 <ul class="dropdown-menu">
                   <li><%= link_to("Sent", :controller => 'orders' ,:action => 'index', status: 'S') %></li>
                   <li><%= link_to("Accepted", :controller => 'orders' ,:action => 'index', status: 'A') %></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
                 </ul>
               </li> 
             <% end %>

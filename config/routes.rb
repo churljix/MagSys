@@ -18,7 +18,7 @@ MagSys::Application.routes.draw do
     end
   end
 
-  resources :messages
+  resources :messages, :except => [:edit]
 
   resources :invoices
 

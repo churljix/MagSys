@@ -100,17 +100,17 @@ ActiveRecord::Schema.define(version: 20140510204516) do
   end
 
   create_table "messages", force: true do |t|
-    t.integer  "sender_id"
+    t.integer  "user_id"
     t.integer  "recipient_id"
     t.string   "text",         limit: 1000
-    t.boolean  "status"
+    t.string  "status"
     t.boolean  "visible"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "messages", ["recipient_id"], name: "index_messages_on_recipient_id"
-  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id"
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
   create_table "orders", force: true do |t|
     t.integer  "issue_id"

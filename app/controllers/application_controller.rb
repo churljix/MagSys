@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # before_action :confirm_logged_in
   helper_method :is_power, :nil_zero
+  before_action :login_user
+  before_action :unread_messages
 
 private
 
@@ -56,6 +58,20 @@ private
         return false
       end
     end
+  end
+
+  def login_user
+    unless session[:user_id]
+      return @user_login
+    else
+      @user_login = User.find(session[:user_id])
+      return @user_login
+    end 
+  end
+
+  def unread_messages
+    @un_messages = Message.where(:status => 'S').paginate(:page => params[:page], :per_page => 10).where(:recipient_id => session[:user_id]).where(:visible => true).count
+    return @un_messages
   end
 
 

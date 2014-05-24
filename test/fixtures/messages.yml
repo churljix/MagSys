@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  sender_id: 1
+  user_id: 1
   recipient_id: 1
   text: MyString
   status: false
   visible: false
 
 two:
-  sender_id: 1
+  user_id: 1
   recipient_id: 1
   text: MyString
   status: false
