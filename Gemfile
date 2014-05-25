@@ -51,6 +51,10 @@ gem 'date_validator'
 #calendar
 #gem 'bootstrap-datepicker-rails'
 
+#pdf
+gem 'prawn'
+gem "prawnto_2", :require => "prawnto"
+
 #pagination
 gem 'will_paginate', '~> 3.0'
 

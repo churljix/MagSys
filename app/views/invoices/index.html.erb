@@ -28,7 +28,7 @@
 
     <tbody>
       <%= content_tag_for(:tr, @invoices) do |invoice| %>
-          <% if invoice.status == 'S' or invoice.status == 'P' and @is_power%>
+          <% if invoice.status == 'S' or invoice.status == 'P' and !is_power%>
             
             <td><strong><%= invoice.date %></strong></td>
             <td><strong><%= invoice.due_date %></strong></td>

@@ -40,6 +40,7 @@
             <td><%= link_to 'Show orders', orders_path(:contract_id => contract.id) %></td>
             
             <% if is_power %>
+              <td><%= link_to 'Create Invoice', new_invoice_path(:contract_id => contract.id, :total => c_remaining(contract.id )) %></td>
               <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
               <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               <td><button class="btn btn-primary btn-orders" data-pk='<%= contract.id %>' data-toggle="modal" data-target="#myModal">

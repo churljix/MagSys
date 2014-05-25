@@ -24,7 +24,11 @@ MagSys::Application.routes.draw do
 
   resources :payments, :only => [:show, :index, :new, :create, :destroy]
 
-  resources :users
+  resources :users do
+        collection do
+        put :add
+      end
+  end
 
   resources :agencies
 

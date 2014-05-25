@@ -12,6 +12,11 @@ class AgenciesController < ApplicationController
   # GET /agencies/1
   # GET /agencies/1.json
   def show
+    require "prawn"
+
+  Prawn::Document.generate("hello.pdf") do
+    text "Hello World!"
+    end
   end
 
   # GET /agencies/new

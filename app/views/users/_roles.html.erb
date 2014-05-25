@@ -1,0 +1,42 @@
+<script>
+      $('.btn-roles').click(function() {
+          $('#con_pk').attr('value', $(this).attr('data-pk'));
+      });
+</script>
+<div id="myModal" class="modal fade bs-example-modal-lg">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Roles to User</h4>
+      </div>
+      <%= form_tag add_users_path, :method => :put  do %>
+      <input type='hidden' name='con_pk' id='con_pk' /> 
+      <div class="modal-body ">
+
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+                  <th></th>
+                  <th>Role</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <%= content_tag_for(:tr, @roles) do |role| %>
+                  <td><%= radio_button_tag "role_id[]", role.id%></td>
+                  <td><%= role.name %></td>
+                      
+            <% end %>
+          </tbody>
+        </table>
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag "Change", :class=>"btn btn-primary" %>
+        <% end %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

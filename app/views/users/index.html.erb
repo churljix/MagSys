@@ -23,8 +23,6 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Agency</th>
-        <th></th>
-        <th></th>
       </tr>
     </thead>
 
@@ -36,6 +34,17 @@
             <td><%= user.email %></td>
             <td><%= user.phone %></td>
             <td><%= user.agency.title %></td>
+            <td><% if user.admin? %>
+                  <%= 'Administrator' %>
+                <% end %>
+                <% if user.agent? %>
+                  <%= 'Agent' %>
+                <% end %>
+            </td>
+            <td><button class="btn btn-primary btn-roles" data-pk='<%= user.id %>' data-toggle="modal" data-target="#myModal">
+                Change Role
+                </button>
+            </td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
@@ -45,3 +54,4 @@
   <%= will_paginate @users, :class=> "pagination pagination-sm", renderer: BootstrapPagination::Rails %>
   </center>
 </div>
+<div><%= render 'roles' %></div>

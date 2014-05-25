@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_agencies
   before_action :is_power_user, only: [:index, :destroy]
+  before_action :set_roles
   
   # GET /users
   # GET /users.json
@@ -23,6 +24,17 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  def add
+    @user = User.find(params[:con_pk])
+      if params[:role_id].include?('1')
+        @user.roles = :agent
+      elsif params[:role_id].include?('4')
+        @user.roles = :admin
+      end  
+
+    redirect_to users_path
   end
 
   # POST /users
@@ -74,6 +86,10 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:username, :name, :last_name, :email, :phone, :agency_id, :password, :password_confirmation, :status)
+    end
+
+    def set_roles
+      @roles = Role.where(:id => [1,4])
     end
 
 end

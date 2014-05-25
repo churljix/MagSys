@@ -1,12 +1,12 @@
 class PaymentsController < ApplicationController
   before_action :confirm_logged_in
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
-  before_action :is_power_user, only: [:destroy]
+  before_action :is_power_user, except: [:show, :new, :create]
   
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all.paginate(:page => params[:page], :per_page => 10)
+    @payments = Payment.where(:status => 'Y').paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /payments/1

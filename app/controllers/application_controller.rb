@@ -94,7 +94,7 @@ private
       @users = User.where(:status => 'Y')
     end
   def set_orders
-      @orders = Order.where(:contract_id => nil).where.not(status: 'D')
+      @orders = Order.where(:contract_id => nil).where(status: 'A')
   end
   def set_clients
       @clients = Client.where(:status => 'Y')
