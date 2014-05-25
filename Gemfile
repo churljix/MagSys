@@ -49,7 +49,7 @@ gem 'carrierwave'
 gem 'date_validator'
 
 #calendar
-gem 'bootstrap-datepicker-rails'
+#gem 'bootstrap-datepicker-rails'
 
 #pagination
 gem 'will_paginate', '~> 3.0'

@@ -1,6 +1,8 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  before_action :is_power_login, except: [:new, :create]
+  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  
   # GET /clients
   # GET /clients.json
   def index
@@ -69,6 +71,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:title, :reg_number, :phone, :contact, :email)
+      params.require(:client).permit(:title, :reg_number, :phone, :contact, :email, :status)
     end
 end

@@ -1,3 +1,4 @@
+
 <div class="page-header">
   <%= link_to new_contract_path, :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
@@ -20,6 +21,8 @@
             <th>Discount</th>
             <th>Notes</th>
             <th>Last updated by</th>
+            <th>Total</th>
+            <th>Remaining</th>
 
       </tr>
     </thead>
@@ -32,11 +35,19 @@
             <td><%= contract.discount %></td>
             <td><%= contract.notes %></td>
             <td><%= contract.user.username %></td>
-        <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
-        <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-         <td><button class="btn btn-primary btn-orders" data-pk='<%= contract.id %>' data-toggle="modal" data-target="#myModal">
+            <td><%= c_total(contract.id ) %></td>
+            <td><%= c_remaining(contract.id ) %></td>
+            <td><%= link_to 'Show orders', orders_path(:contract_id => contract.id) %></td>
+            
+            <% if is_power %>
+              <td><%= link_to 'Edit', edit_contract_path(contract) %></td>
+              <td><%= link_to 'Destroy', contract, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><button class="btn btn-primary btn-orders" data-pk='<%= contract.id %>' data-toggle="modal" data-target="#myModal">
                 Add Orders
-              </button></td>
+                </button>
+              </td>
+            <% end %>
+        
               
       <% end %>
     </tbody>

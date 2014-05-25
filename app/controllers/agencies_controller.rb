@@ -1,5 +1,6 @@
 class AgenciesController < ApplicationController
   before_action :confirm_logged_in, except: [ :new, :create]
+  before_action :is_power_login, only: [:edit, :update, :destroy]
   before_action :set_agency, only: [:show, :edit, :update, :destroy]
 
   # GET /agencies
@@ -70,6 +71,6 @@ class AgenciesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def agency_params
-      params.require(:agency).permit(:title, :reg_number, :address, :phone)
+      params.require(:agency).permit(:title, :reg_number, :address, :phone, :status)
     end
 end

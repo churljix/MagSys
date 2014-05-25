@@ -1,8 +1,14 @@
 class ContractsController < ApplicationController
-  before_action :set_contract, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  before_action :is_power_login, except: [:index]
+  before_action :set_contract, only: [:show, :edit, :update, :destroy]
+  
   before_action :set_agencies
   before_action :set_orders
+
+
+  helper_method :c_remaining
+  helper_method :c_total
   # GET /contracts
   # GET /contracts.json
   def index
@@ -76,7 +82,20 @@ class ContractsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contract_params
-      params.require(:contract).permit(:agency_id, :date, :discount, :notes, :user_id)
+      params.require(:contract).permit(:agency_id, :date, :discount, :notes, :user_id, :status)
     end
 
+  def c_total(c_id)
+    @orders = Order.where(:contract_id => c_id)
+    @c_total = @orders.sum(:total_amount)
+    return @c_total
+  end
+
+  def c_remaining(c_id)
+   @invoices = Invoice.where(:contract_id => c_id)
+   @payments = Payment.where(:invoice_id => @invoices)
+   @remaining = @payments.sum(:amount)
+   @c_remaining = @c_total - @remaining
+   return @c_remaining
+  end
 end

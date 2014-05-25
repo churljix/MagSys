@@ -1,3 +1,9 @@
+<script>
+      $('.btn-orders').click(function() {
+          $('#con_pk').attr('value', $(this).attr('data-pk'));
+      });
+</script>
+
 <div id="myModal" class="modal fade bs-example-modal-lg">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -6,6 +12,7 @@
         <h4 class="modal-title">Add Orders to Contract</h4>
       </div>
       <%= form_tag add_contracts_path, :method => :put  do %>
+      <input type='hidden' name='con_pk' id='con_pk' /> 
       <div class="modal-body ">
 
         <table class="table table-striped table-bordered table-hover">
@@ -40,7 +47,7 @@
                   <td><%= order.title %></td>
                   <td><%= order.notes %></td>
                   <td><%= order.total_amount %></td>
-                  <input type='hidden' name='con_pk' id='con_pk' />     
+                      
             <% end %>
           </tbody>
         </table>

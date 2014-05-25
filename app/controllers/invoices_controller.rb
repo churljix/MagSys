@@ -1,10 +1,12 @@
 class InvoicesController < ApplicationController
-  before_action :set_invoice, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  before_action :is_power_login, except: [:index, :show]
+  before_action :set_invoice, only: [:show, :edit, :update, :destroy]
+  
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.where(:status => 'Y').paginate(:page => params[:page], :per_page => 10)
+    @invoices = Invoice.where.not(:status => 'D').paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /invoices/1
@@ -25,6 +27,7 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
+    @invoice.remaining = @invoice.total
 
     respond_to do |format|
       if @invoice.save
@@ -54,7 +57,7 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1
   # DELETE /invoices/1.json
   def destroy
-    @invoice.update_attribute(:status, 'N')
+    @invoice.update_attribute(:status, 'D')
     respond_to do |format|
       format.html { redirect_to invoices_url }
       format.json { head :no_content }
@@ -69,6 +72,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:invoice).permit(:total, :remaining, :date, :due_date, :contract_id, :note)
+      params.require(:invoice).permit(:total, :remaining, :date, :due_date, :contract_id, :note, :status)
     end
 end

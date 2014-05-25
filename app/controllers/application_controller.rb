@@ -2,10 +2,11 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  # before_action :confirm_logged_in
+  #before_action :confirm_logged_in
   helper_method :is_power, :nil_zero
   before_action :login_user
   before_action :unread_messages
+  before_action :unpaid_invoices
 
 private
 
@@ -37,14 +38,19 @@ private
       else
         return false
       end
-      #   session[:admin] = true
-      # elsif @user.editor?
-      #   session[:editor] = true
-      # elsif @user.accountant?
-      #   session[:accountant] = true
-      # else
-      #   session[:agent] = true
-      # end      
+    end
+  end
+
+  def is_power_login
+    if session[:user_id]
+      @user_roles = User.find(session[:user_id])
+      if @user_roles.admin? or @user_roles.editor?
+        return true
+      else
+        flash[:notice]= "No premission to view this content"
+        redirect_to(magazines_path)
+        return false
+      end
     end
   end
 
@@ -70,10 +76,15 @@ private
   end
 
   def unread_messages
-    @un_messages = Message.where(:status => 'S').paginate(:page => params[:page], :per_page => 10).where(:recipient_id => session[:user_id]).where(:visible => true).count
+    @un_messages = Message.where(:status => 'S').where(:recipient_id => session[:user_id]).where(:visible => true).count
     return @un_messages
   end
 
+  def unpaid_invoices
+    @user_contracts = Contract.where(:user_id => session[:user_id])
+    @un_invoices = Invoice.where(:status => ['S','P']).where(:contract_id => @user_contracts ).count 
+    return @un_invoices
+  end
 
   def set_agencies
       @agencies = Agency.where(:status => 'Y')

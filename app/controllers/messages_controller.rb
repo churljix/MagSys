@@ -1,6 +1,8 @@
 class MessagesController < ApplicationController
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :user_messages, only: [:show, :edit, :update, :destroy]
+  
   before_action :set_power_users, only: [:new]
   # GET /messages
   # GET /messages.json
@@ -21,8 +23,8 @@ class MessagesController < ApplicationController
   end
 
   # GET /messages/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /messages
   # POST /messages.json
@@ -40,19 +42,19 @@ class MessagesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /messages/1
-  # PATCH/PUT /messages/1.json
-  def update
-    respond_to do |format|
-      if @message.update(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # # PATCH/PUT /messages/1
+  # # PATCH/PUT /messages/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @message.update(message_params)
+  #       format.html { redirect_to @message, notice: 'Message was successfully updated.' }
+  #       format.json { head :no_content }
+  #     else
+  #       format.html { render action: 'edit' }
+  #       format.json { render json: @message.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /messages/1
   # DELETE /messages/1.json
@@ -83,4 +85,18 @@ class MessagesController < ApplicationController
         @users = User.where(:status => 'Y').where(:id => @power_users)
       end
     end
+
+    def user_messages
+    if is_power
+      return true  
+    else  
+      if @message.recipient_id == session[:user_id] and @message.status != 'D'
+        return true
+      else
+        flash[:notice]= "No premission to view this content"  
+        redirect_to(messages_path)      
+        return false
+      end
+    end
+  end
 end

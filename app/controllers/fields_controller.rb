@@ -1,6 +1,7 @@
 class FieldsController < ApplicationController
 
   before_action :confirm_logged_in, except: [ :index]
+  before_action :is_power_login, except: [ :index, :index_other]
   before_action :set_field, only: [:show, :edit, :update, :destroy]
   
   before_action :find_magazine
@@ -47,7 +48,7 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       if @field.save
-        format.html { redirect_to [@magazine, @field], notice: 'Field was successfully created.' }
+        format.html { redirect_to [@magazine,@issue, @field], notice: 'Field was successfully created.' }
         format.json { render action: 'show', status: :created, location: @field }
       else
         format.html { render action: 'new' }
@@ -61,7 +62,7 @@ class FieldsController < ApplicationController
   def update
     respond_to do |format|
       if @field.update(field_params)
-        format.html { redirect_to [@magazine, @field], notice: 'Field was successfully updated.' }
+        format.html { redirect_to [@magazine,@issue, @field], notice: 'Field was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -75,7 +76,7 @@ class FieldsController < ApplicationController
   def destroy
     @field.update_attribute(:status, 'N')
     respond_to do |format|
-      format.html { redirect_to magazine_fields_url }
+      format.html { redirect_to magazine_issue_fields_path }
       format.json { head :no_content }
     end
   end
@@ -88,7 +89,7 @@ class FieldsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def field_params
-      params.require(:field).permit(:title, :height, :width, :price, :magazine_id)
+      params.require(:field).permit(:title, :height, :width, :price, :magazine_id, :status)
     end
 
     def find_magazine

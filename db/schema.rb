@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510204516) do
+ActiveRecord::Schema.define(version: 20140525134501) do
 
   create_table "agencies", force: true do |t|
     t.string   "title"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140510204516) do
     t.integer  "agency_id"
     t.date     "date"
     t.decimal  "discount"
-    t.string   "notes",           limit: 500
+    t.string   "notes",      limit: 500
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -103,14 +103,13 @@ ActiveRecord::Schema.define(version: 20140510204516) do
     t.integer  "user_id"
     t.integer  "recipient_id"
     t.string   "text",         limit: 1000
-    t.string  "status"
+    t.string   "status",       limit: nil
     t.boolean  "visible"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["recipient_id"], name: "index_messages_on_recipient_id"
-  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+  add_index "messages", ["recipient_id", "user_id"], name: "index_messages_on_user_id"
 
   create_table "orders", force: true do |t|
     t.integer  "issue_id"
@@ -121,7 +120,6 @@ ActiveRecord::Schema.define(version: 20140510204516) do
     t.string   "title"
     t.string   "notes",        limit: 500
     t.decimal  "total_amount"
-    t.decimal  "remaining"
     t.decimal  "special"
     t.datetime "created_at"
     t.datetime "updated_at"

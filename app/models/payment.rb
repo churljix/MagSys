@@ -6,8 +6,8 @@ class Payment < ActiveRecord::Base
   					  numericality: true
   	validates :amount, :presence => true,
   					       numericality: true
-  	# validates :date, 	:presence => true,
-  	# 					date: true,
-  	# 					date: { before: Time.now }
+  	validates :date, 	:presence => true,
+  						date: true,
+  						date: { before: Time.now }
 
 end

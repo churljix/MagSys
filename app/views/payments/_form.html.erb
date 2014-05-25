@@ -12,13 +12,8 @@
     </div>
   <% end %>
   <%= f.text_field :status, :class => "hidden form-control", :value => 'Y' %>
+  <%= f.number_field :invoice_id, :class => "hidden form-control", :value => params[:invoice_id] %>
 
-  <div class="form-group">
-    <%= f.label :invoice_id, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-10">
-      <%= f.number_field :invoice_id, :class => "form-control" %>
-    </div>
-  </div>
   <div class="form-group">
     <%= f.label :amount, :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
@@ -28,7 +23,7 @@
   <div class="form-group">
     <%= f.label :date, :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :date, 'data-behaviour' => 'datepicker', :class => "form-control datepicker" %>
+      <%= f.date_field :date, :class => "form-control" %>
     </div>
   </div>
   <div class="form-group">

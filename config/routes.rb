@@ -22,7 +22,7 @@ MagSys::Application.routes.draw do
 
   resources :invoices
 
-  resources :payments
+  resources :payments, :only => [:show, :index, :new, :create, :destroy]
 
   resources :users
 

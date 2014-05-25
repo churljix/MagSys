@@ -1,6 +1,8 @@
 class MagazinesController < ApplicationController
-  before_action :set_magazine, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  before_action :is_power_login, except: [:index]
+  before_action :set_magazine, only: [:show, :edit, :update, :destroy]
+  
   # GET /magazines
   # GET /magazines.json
   def index
@@ -65,6 +67,12 @@ class MagazinesController < ApplicationController
   # DELETE /magazines/1
   # DELETE /magazines/1.json
   def destroy
+    
+    @issues = Issue.where(:magazine_id => @magazine.id)    
+    @fields = Field.where(:magazine_id => @magazine.id)
+
+    @fields.update_all(:status =>'N')
+    @issues.update_all(:status => 'N')
     @magazine.update_attribute(:status, 'N')
     respond_to do |format|
       format.html { redirect_to magazines_url }

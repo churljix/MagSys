@@ -1,12 +1,12 @@
 class IssuesController < ApplicationController
   before_action :confirm_logged_in, except: [ :index]
-  # before_action :require_role :admin
+  before_action :is_power_login, except: [ :index, :index_other]
   before_action :find_magazine
   before_action :set_issue, only: [:show, :edit, :update, :destroy]
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.where(:magazine_id => params[:magazine_id]).order(:number).paginate(:page => params[:page], :per_page => 10)
+    @issues = Issue.where(:magazine_id => params[:magazine_id], :status => 'Y').order(:number).paginate(:page => params[:page], :per_page => 10)
     if session[:user_id]
       @user = User.find(session[:user_id])
       if is_power
@@ -20,7 +20,7 @@ class IssuesController < ApplicationController
   end
 
    def index_other
-     @issues = Issue.where(:magazine_id => params[:magazine_id]).order(:number).paginate(:page => params[:page], :per_page => 10)
+     @issues = Issue.where(:magazine_id => params[:magazine_id], :status => 'Y').order(:number).paginate(:page => params[:page], :per_page => 10)
    end
 
   # GET /issues/1
@@ -70,7 +70,14 @@ class IssuesController < ApplicationController
   # DELETE /issues/1
   # DELETE /issues/1.json
   def destroy
-    @issue.update_attribute(:status, 'N')
+    @issue_count = Issue.where(:magazine_id => @issue.magazine_id).count
+    if @issue_count > 1 
+      @issue.update_attribute(:status, 'N')
+    else
+      @fields = Field.where(:magazine_id => @magazine.id)
+      @fields.update_all(:status =>'N')
+      @issue.update_attribute(:status, 'N')
+    end
     respond_to do |format|
       format.html { redirect_to magazine_issues_url }
       format.json { head :no_content }

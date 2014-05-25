@@ -1,15 +1,31 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  #before_action :is_power_login, except: [:index, :create]
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :user_object, only: [:show, :edit, :update, :destroy]
+  
   before_action :set_issues
   before_action :set_clients
+
   # GET /orders
   # GET /orders.json
   def index
     if is_power
-      @orders = Order.where.not(status: 'D').paginate(:page => params[:page], :per_page => 10)
+      if params[:contract_id].nil?
+        @orders = Order.where(status: 'S').paginate(:page => params[:page], :per_page => 10)
+      else
+        @orders = Order.where(:contract_id => params[:contract_id]).paginate(:page => params[:page], :per_page => 10)
+      end
     else
-      @orders = Order.where( :status => params[:status], :user_id => session[:user_id]).paginate(:page => params[:page], :per_page => 10)
+      if params[:contract_id].nil?
+        if params[:status].nil?
+          @orders = Order.where( :status => 'P', :user_id => session[:user_id]).paginate(:page => params[:page], :per_page => 10).where.not(:status => ['D'])
+        else
+          @orders = Order.where( :status => params[:status], :user_id => session[:user_id]).paginate(:page => params[:page], :per_page => 10).where.not(:status => ['D'])
+        end
+      else
+        @orders = Order.where(:contract_id => params[:contract_id]).paginate(:page => params[:page], :per_page => 10)
+      end
     end
   end
 
@@ -81,6 +97,20 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:issue_id, :field_id, :client_id, :user_id, :contract_id, :title, :notes, :total_amount, :remaining, :special, :status)
+      params.require(:order).permit(:issue_id, :field_id, :client_id, :user_id, :contract_id, :title, :notes, :total_amount, :special, :status)
     end
+
+  def user_object
+    if is_power
+      return true
+    else
+      if @order.user_id == session[:user_id]
+        return true
+      else
+        flash[:notice]= "No premission to view this content"  
+        redirect_to(orders_path(:status => 'A'))      
+        return false
+      end
+    end
+  end
 end

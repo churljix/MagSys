@@ -22,6 +22,6 @@ class User < ActiveRecord::Base
   	validates :password, :confirmation => true,
   						 :length => { :within => 6..20 },
   						 :format => PASSWORD_REGEX,
-  						 :presence => true					 
+  						 :presence => true,		on: :create			 
 
 end

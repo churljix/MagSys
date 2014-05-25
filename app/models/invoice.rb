@@ -8,12 +8,12 @@ class Invoice < ActiveRecord::Base
   					  numericality: true
   	validates :remaining, :presence => true,
   					       numericality: true
-  	# validates :date, 	:presence => true,
-  	# 					date: true,
-  	# 					date: { before: :due_date }
-  	# validates :due_date, 	:presence => true,
-  	# 						date: true,
-  	# 						date: { after: :date }
+  	validates :date, 	:presence => true,
+  						date: true,
+  						date: { before: :due_date }
+  	validates :due_date, 	:presence => true,
+  							date: true,
+  							date: { after: :date }
   	validates :contract_id, :presence => true,
   							numericality: true					
   	#validates :note, :lenght => { :within => 0..500 }		

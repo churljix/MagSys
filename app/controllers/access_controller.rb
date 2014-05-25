@@ -1,6 +1,7 @@
 class AccessController < ApplicationController
 	before_action :confirm_logged_in, :except => [:login, :attempt_login, :logout]
   before_action :system_user, :only => [:login,:attempt_login]
+  before_action :is_power_login, :only => [:index]
   def index
   	#dispaly text
   end
