@@ -3,7 +3,7 @@
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
   <% end %>
-	<%= link_to new_message_path(:recipient_id => @message.recipient_id), :class => 'btn btn-default' do %>
+	<%= link_to new_message_path(:recipient_id => @message.user_id), :class => 'btn btn-default' do %>
     <span class="glyphicon glyphicon-plus"></span>
     Reply
   <% end %>

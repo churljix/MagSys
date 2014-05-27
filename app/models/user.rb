@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   					  :length => { :within => 4..254 },
   					  :format => { :with => EMAIL_REGEX, :message => " is not in format a@b.c"},
   					  :uniqueness => true
+    validates :agency_id, :presence => true
   	validates :password, :confirmation => true,
   						 :length => { :within => 6..20 },
   						 :format => PASSWORD_REGEX,

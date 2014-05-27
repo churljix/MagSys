@@ -41,7 +41,7 @@
               <td><%= message.text[0..19] %>. . .</td>  
             <% end %>
           <td><%= link_to 'Read', message %></td>
-          <td><%= link_to 'Reply', new_message_path(:recipient_id => message.recipient_id) %></td>
+          <td><%= link_to 'Reply', new_message_path(:recipient_id => message.user_id) %></td>
           <td><%= link_to 'Delete', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
       <% end %>
     </tbody>

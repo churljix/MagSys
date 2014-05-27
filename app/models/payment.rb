@@ -7,7 +7,6 @@ class Payment < ActiveRecord::Base
   	validates :amount, :presence => true,
   					       :numericality => { :greater_than_or_equal_to => 0 }
   	validates :date, 	:presence => true
-  						#date: true,
-  						#date: { before: Time.now }
+  	validates_date :date,	:on_or_after => :today
 
 end

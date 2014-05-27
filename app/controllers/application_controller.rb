@@ -76,16 +76,19 @@ private
   end
 
   def unread_messages
-    @un_messages = Message.where(:status => 'S').where(:recipient_id => session[:user_id]).where(:visible => true).count
-    return @un_messages
+    if session[:user_id]
+      @un_messages = Message.where(:status => 'S').where(:recipient_id => session[:user_id]).where(:visible => true).count
+      return @un_messages
+    end
   end
 
   def unpaid_invoices
-
-    @user = User.find(session[:user_id])
-    @user_contracts = Contract.where(:agency_id => @user.agency_id, :status => 'Y')
-    @un_invoices = Invoice.where(:status => ['S','P']).where(:contract_id => @user_contracts ).count 
-    return @un_invoices
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @user_contracts = Contract.where(:agency_id => @user.agency_id, :status => 'Y')
+      @un_invoices = Invoice.where(:status => ['S','P']).where(:contract_id => @user_contracts ).count 
+      return @un_invoices
+    end
   end
 
   def set_agencies

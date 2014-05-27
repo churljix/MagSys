@@ -12,16 +12,16 @@
 
 <dl class="dl-horizontal">
   <dt>Issue:</dt>
-  <dd><%= @order.issue_id %></dd>
+  <dd><%= @order.issue_id.to_s + '# ' + @order.issue.magazine.title %></dd>
 
   <dt>Field:</dt>
-  <dd><%= @order.field_id %></dd>
+  <dd><%= @order.field.title %></dd>
 
   <dt>Client:</dt>
-  <dd><%= @order.client_id %></dd>
+  <dd><% if @order.client_id == 0 or @order.client_id.nil? %> <% else %><%= @order.client.title %><% end %></dd>
 
   <dt>User:</dt>
-  <dd><%= @order.user_id %></dd>
+  <dd><%= @order.user.username %></dd>
 
   <dt>Contract:</dt>
   <dd><%= @order.contract_id %></dd>
@@ -34,9 +34,6 @@
 
   <dt>Total amount:</dt>
   <dd><%= @order.total_amount %></dd>
-
-  <dt>Remaining:</dt>
-  <dd><%= @order.remaining %></dd>
 
   <dt>Special:</dt>
   <dd><%= @order.special %></dd>

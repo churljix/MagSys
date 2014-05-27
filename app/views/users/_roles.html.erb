@@ -24,7 +24,7 @@
 
           <tbody>
             <%= content_tag_for(:tr, @roles) do |role| %>
-                  <td><%= radio_button_tag "role_id[]", role.id%></td>
+                  <td><%= radio_button_tag "role_id[]", role.id, true %></td>
                   <td><%= role.name %></td>
                       
             <% end %>
