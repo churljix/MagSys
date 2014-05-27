@@ -2,6 +2,9 @@
   <h1>Main page</h1>
 </div>
 <div class="row">
+<% if @magazines.nil? || @magazines.empty?%>
+	<h3>No available magazines</h3>
+<% end %>
 <%= content_tag_for(:tr, @magazines) do |magazine| %>
 	<% if magazine.status == 'Y' %>
 	  <div class="col-md-3 col-sm-6 ">

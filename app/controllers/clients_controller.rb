@@ -58,7 +58,7 @@ class ClientsController < ApplicationController
   def destroy
     @client.update_attribute(:status, 'N')
     respond_to do |format|
-      format.html { redirect_to clients_url }
+      format.html { redirect_to clients_url, notice: 'Client was successfully deleted.'}
       format.json { head :no_content }
     end
   end

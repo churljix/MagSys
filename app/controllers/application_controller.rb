@@ -81,7 +81,9 @@ private
   end
 
   def unpaid_invoices
-    @user_contracts = Contract.where(:user_id => session[:user_id])
+
+    @user = User.find(session[:user_id])
+    @user_contracts = Contract.where(:agency_id => @user.agency_id, :status => 'Y')
     @un_invoices = Invoice.where(:status => ['S','P']).where(:contract_id => @user_contracts ).count 
     return @un_invoices
   end

@@ -69,7 +69,7 @@ class PaymentsController < ApplicationController
   def destroy
     @payment.update_attribute(:status, 'N')
     respond_to do |format|
-      format.html { redirect_to payments_url }
+      format.html { redirect_to payments_url, notice: 'Payment was successfully deleted.' }
       format.json { head :no_content }
     end
   end

@@ -70,8 +70,7 @@
                     <% end %>
                   
                 </td>
-              <% end %>
-              <% if order.status = 'S' and is_power%> 
+              <% elsif order.status = 'S' and is_power %>
                 <td>
                   
                     <%= form_for(order, :html => { :class => "form-horizontal" }) do |t| %>
@@ -79,7 +78,7 @@
                       <center><%= t.submit "Accept order", :class => "btn btn-default"%></center>
                     <% end %>
                   
-                </td>
+                </td>  
               <% end %>
               <td><center><%= link_to 'Edit', edit_order_path(order), :class => "btn btn-default" %></center></td>
               <td><center><%= button_to 'Remove', order, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %></center></td>

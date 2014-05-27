@@ -75,7 +75,7 @@ class MagazinesController < ApplicationController
     @issues.update_all(:status => 'N')
     @magazine.update_attribute(:status, 'N')
     respond_to do |format|
-      format.html { redirect_to magazines_url }
+      format.html { redirect_to magazines_url, notice: 'Magazine was successfully deleted.'  }
       format.json { head :no_content }
     end
   end

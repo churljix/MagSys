@@ -30,11 +30,10 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
-
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @message }
+        format.html { redirect_to messages_path, notice: 'Message was successfully created.' }
+        format.json { render action: 'index', status: :created, location: @message }
       else
         format.html { render action: 'new' }
         format.json { render json: @message.errors, status: :unprocessable_entity }
@@ -61,7 +60,7 @@ class MessagesController < ApplicationController
   def destroy
     @message.update_attribute(:status, 'D')
     respond_to do |format|
-      format.html { redirect_to messages_url }
+      format.html { redirect_to messages_url,notice: 'Message was successfully deleted.'  }
       format.json { head :no_content }
     end
   end
@@ -90,7 +89,7 @@ class MessagesController < ApplicationController
     if is_power
       return true  
     else  
-      if @message.recipient_id == session[:user_id] and @message.status != 'D'
+      if (@message.recipient_id == session[:user_id] or @message.user_id == session[:user_id]) and @message.status != 'D'
         return true
       else
         flash[:notice]= "No premission to view this content"  

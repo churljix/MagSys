@@ -12,7 +12,12 @@ class ContractsController < ApplicationController
   # GET /contracts
   # GET /contracts.json
   def index
-    @contracts = Contract.where(:status => 'Y').paginate(:page => params[:page], :per_page => 10)
+    if is_power
+      @contracts = Contract.where( :status => 'Y').paginate(:page => params[:page], :per_page => 10)
+    else
+      @user = User.find(session[:user_id])
+      @contracts = Contract.where(:agency_id => @user.agency_id, :status => 'Y').paginate(:page => params[:page], :per_page => 10)
+    end
   end
 
   # GET /contracts/1
@@ -69,7 +74,7 @@ class ContractsController < ApplicationController
   def destroy
     @contract.update_attribute(:status, 'N')
     respond_to do |format|
-      format.html { redirect_to contracts_url }
+      format.html { redirect_to contracts_url, notice: 'Contract was successfully deleted.' }
       format.json { head :no_content }
     end
   end

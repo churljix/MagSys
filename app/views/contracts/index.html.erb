@@ -1,13 +1,15 @@
 
 <div class="page-header">
-  <%= link_to new_contract_path, :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    New Contract
-  <% end %>
-  <%= link_to admin_path, :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    Admin CP
-  <% end %>
+  <% if is_power %>
+    <%= link_to new_contract_path, :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      New Contract
+    <% end %>
+    <%= link_to admin_path, :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Admin CP
+    <% end %>
+   <% end %> 
   <h1>Listing contracts</h1>
 </div>
 

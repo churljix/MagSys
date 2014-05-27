@@ -7,7 +7,7 @@ class Issue < ActiveRecord::Base
 	validates :magazine_id, :presence => true,
   					  numericality: true
   	validates :number, :presence => true,
-  					       numericality: true
+  					       :inclusion => 1..365
   	validates :date, 	:presence => true,
   						date: true,
   						date: { before: :due_date }

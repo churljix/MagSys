@@ -63,7 +63,7 @@ class AgenciesController < ApplicationController
   def destroy
     @agency.update_attribute(:status, 'N')
     respond_to do |format|
-      format.html { redirect_to agencies_url }
+      format.html { redirect_to agencies_url, notice: 'Agency was successfully deleted.'  }
       format.json { head :no_content }
     end
   end

@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :confirm_logged_in
   #before_action :is_power_login, except: [:index, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-  before_action :user_object, only: [:show, :edit, :update, :destroy]
+  #before_action :user_object, only: [:show, :edit, :update, :destroy]
   
   before_action :set_issues
   before_action :set_clients
@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to orders_path(:status => 'S'), notice: 'Order was successfully updated.' }
+        format.html { redirect_to orders_path(:status => 'P'), notice: 'Order was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -84,7 +84,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.update_attribute(:status, 'D')
     respond_to do |format|
-      format.html { redirect_to orders_url }
+      format.html { redirect_to orders_url , notice: 'Order was successfully deleted.' }
       format.json { head :no_content }
     end
   end

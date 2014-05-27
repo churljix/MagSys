@@ -13,6 +13,7 @@
   <% end %>
 
   <%= f.text_field :status, :class => "hidden form-control", :value => 'S' %>
+  <%= f.text_field :visible, :class => "hidden form-control", :value => 't' %>
   <%= f.number_field :user_id, :class => "hidden form-control", :value => session[:user_id] %>
 
   <div class="form-group">

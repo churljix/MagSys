@@ -6,17 +6,17 @@ class Magazine < ActiveRecord::Base
 
   mount_uploader :picture, PictureUploader
 
-	validates :title, :presence => true,
-					  :length => { :within => 1..255 }
-	validates :issue, :presence => true,
-  					  numericality: true
-  	validates :prints, :presence => true,
-  					       numericality: true
-  	validates :subscribers, :presence => true,
-  					  numericality: true
-  	validates :readership, :presence => true,
-  					  numericality: true				  				       
-  	#validates :picture				  
+  	validates :title, :presence => true,
+  					  :length => { :within => 1..255 }
+  	validates :issue, :presence => true,
+    					  :inclusion => 1..365
+  	validates :prints, 
+  					       :inclusion => 1..100000
+  	validates :subscribers, 
+  					  :inclusion => 1..100000
+  	validates :readership, 
+  					  :inclusion => 1..100000				  				       
+
   	validates :status, :presence => true,
   					   :inclusion => { :in =>  %w(Y N) }
 	

@@ -6,7 +6,13 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.json
   def index
-    @invoices = Invoice.where.not(:status => 'D').paginate(:page => params[:page], :per_page => 10)
+    if is_power
+      @invoices = Invoice.where.not(:status => 'D').paginate(:page => params[:page], :per_page => 10)
+    else
+      @user = User.find(session[:user_id])
+      @contracts = Contract.where(:agency_id => @user.agency_id, :status => 'Y')
+      @invoices = Invoice.where.not(:status => 'D').paginate(:page => params[:page], :per_page => 10).find_all_by_contract_id(@contracts)
+    end
   end
 
   # GET /invoices/1
@@ -59,7 +65,7 @@ class InvoicesController < ApplicationController
   def destroy
     @invoice.update_attribute(:status, 'D')
     respond_to do |format|
-      format.html { redirect_to invoices_url }
+      format.html { redirect_to invoices_url, notice: 'Invoice was successfully deleted.' }
       format.json { head :no_content }
     end
   end

@@ -76,7 +76,7 @@ class FieldsController < ApplicationController
   def destroy
     @field.update_attribute(:status, 'N')
     respond_to do |format|
-      format.html { redirect_to magazine_issue_fields_path }
+      format.html { redirect_to magazine_issue_fields_path , notice: 'Field was successfully deleted.'}
       format.json { head :no_content }
     end
   end

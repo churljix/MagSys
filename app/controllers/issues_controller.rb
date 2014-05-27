@@ -79,7 +79,7 @@ class IssuesController < ApplicationController
       @issue.update_attribute(:status, 'N')
     end
     respond_to do |format|
-      format.html { redirect_to magazine_issues_url }
+      format.html { redirect_to magazine_issues_url, notice: 'Issue was successfully deleted.' }
       format.json { head :no_content }
     end
   end
