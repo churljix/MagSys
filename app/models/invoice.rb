@@ -4,17 +4,14 @@ class Invoice < ActiveRecord::Base
 	belongs_to :contract
 
 
-	validates :total, :presence => true,
+	   validates :total, :presence => true,
   					  numericality: true
   	# validates :remaining, :presence => true,
   	# 				       numericality: true
-  	validates :date, 	:presence => true,
-  						date: true,
-  						date: { before: :due_date }
-  	validates :due_date, 	:presence => true,
-  							date: true,
-  							date: { after: :date }
+  	validates :date, 	:presence => true
+  	validates :due_date, 	:presence => true
+    validates_date :due_date, :after => :date
   	validates :contract_id, :presence => true,
   							numericality: true					
-  	#validates :note, :lenght => { :within => 0..500 }		
+  	validates_length_of  :note, :maximum => 500		
 end

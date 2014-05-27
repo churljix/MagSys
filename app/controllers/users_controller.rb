@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :set_agencies
   before_action :is_power_user, only: [:index, :destroy]
   before_action :set_roles
+  before_action :user_user, only: [:show]
   
   # GET /users
   # GET /users.json
@@ -90,6 +91,20 @@ class UsersController < ApplicationController
 
     def set_roles
       @roles = Role.where(:id => [1,4])
+    end
+
+    def user_user
+      if is_power
+        return true
+      else
+        if @user.id == session[:user_id]
+          return true
+        else
+          flash[:notice]= "No premission to view this content"  
+          redirect_to(users_path(:id => session[:user_id]))      
+          return false
+        end
+      end
     end
 
 end

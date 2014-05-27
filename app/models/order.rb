@@ -7,15 +7,11 @@ class Order < ActiveRecord::Base
 	belongs_to :user
 
 	  validates :issue_id, :presence => true
-  	validates :field_id, :presence => true			  
-  	#validates :client_id #:presence => true  	validates :user_id, :presence => true,
-  	#validates :contract_id
-  	#validates :notes, :length => { :within => 0..500 } 				  				  
-
-  	#validates :total_amount #:presence => true,
-  	#validates :remaining #:presence => true,
-  	#validates :special
-  	#validates :picture				  
+  	validates :field_id, :presence => true 	
+    validates :user_id, :presence => true
+  	validates_length_of  :notes, :maximum => 500, :allow_blank => true				  				  
+    validates_length_of  :title, :maximum => 100, :allow_blank => true
+  	validates :total_amount, :presence => true, :numericality => { :greater_than_or_equal_to => 0 }
   	validates :status, :presence => true,
   					   :inclusion => { :in =>  %w(D P S A) } #deleted, pending, sent, accepted
 end

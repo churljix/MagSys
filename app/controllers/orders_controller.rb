@@ -6,6 +6,9 @@ class OrdersController < ApplicationController
   
   before_action :set_issues
   before_action :set_clients
+  before_action :set_fields
+  before_action :set_users
+  before_action :set_contracts
 
   # GET /orders
   # GET /orders.json
@@ -36,7 +39,7 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
-    @order = Order.new(order_params)
+    @order = Order.new
   end
 
 
@@ -46,7 +49,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     session[:return_to] ||= request.referer
     respond_to do |format|
-      if @order.save!
+      if @order.save
         if is_power
           format.html { redirect_to @order, notice: 'Order was successfully created.' }
           format.json { render action: 'show', status: :created, location: @order }
@@ -100,17 +103,19 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:issue_id, :field_id, :client_id, :user_id, :contract_id, :title, :notes, :total_amount, :special, :status)
     end
 
-  def user_object
-    if is_power
-      return true
-    else
-      if @order.user_id == session[:user_id]
+    def user_object
+      if is_power
         return true
       else
-        flash[:notice]= "No premission to view this content"  
-        redirect_to(orders_path(:status => 'A'))      
-        return false
+        if @order.user_id == session[:user_id]
+          return true
+        else
+          flash[:notice]= "No premission to view this content"  
+          redirect_to(orders_path(:status => 'A'))      
+          return false
+        end
       end
     end
-  end
+
+    
 end

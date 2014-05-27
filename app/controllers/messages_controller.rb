@@ -4,6 +4,9 @@ class MessagesController < ApplicationController
   before_action :user_messages, only: [:show, :edit, :update, :destroy]
   
   before_action :set_power_users, only: [:new]
+  before_action :set_users
+  helper_method :user_reply
+  helper_method :user_admins
   # GET /messages
   # GET /messages.json
   def index
@@ -30,15 +33,15 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to messages_path, notice: 'Message was successfully created.' }
-        format.json { render action: 'index', status: :created, location: @message }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @message.save
+          format.html { redirect_to messages_path, notice: 'Message was successfully created.' }
+          format.json { render action: 'index', status: :created, location: @message }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @message.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # # PATCH/PUT /messages/1
@@ -98,4 +101,16 @@ class MessagesController < ApplicationController
       end
     end
   end
+
+    def user_reply(cid)
+      @user_reply = User.where(:id => cid)
+      #@user_reply = @user_replys.username
+      return @user_reply
+    end
+
+    def user_admins
+      @role = UserRole.select("user_id").where(:role_id => 4)
+      @admins = User.where(:id => @role)
+      return @admins
+    end
 end

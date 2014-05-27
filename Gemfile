@@ -46,7 +46,7 @@ gem 'carrierwave'
 #gem 'spree_cmd'
 
 #date
-gem 'date_validator'
+gem 'validates_timeliness', '~> 3.0'
 
 #calendar
 #gem 'bootstrap-datepicker-rails'

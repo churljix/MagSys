@@ -98,4 +98,6 @@ class IssuesController < ApplicationController
     def find_magazine
       @magazine = Magazine.find(params[:magazine_id])
     end
+
+    
 end
