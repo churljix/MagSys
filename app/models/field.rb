@@ -10,10 +10,10 @@ class Field < ActiveRecord::Base
   					        numericality: true
   	validates :height, 	numericality: true,
   						:presence => true,
-  						:inclusion => { :in => 1..30 }
+  						:inclusion => { :in => 1..300, :message => " has to be between 1 and 300"}
   	validates :width, :presence => true,
   						numericality: true,
-  						:inclusion => { :in => 1..50}					
+  						:inclusion => { :in => 1..450, :message => " has to be between 1 and 450"}				
   	validates :price, :presence => true,
   					  numericality: true	
 	

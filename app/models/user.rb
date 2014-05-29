@@ -17,12 +17,12 @@ class User < ActiveRecord::Base
   						 :uniqueness => true
   	validates :email, :presence => true,
   					  :length => { :within => 4..254 },
-  					  :format => { :with => EMAIL_REGEX, :message => " is not in format a@b.c"},
+  					  :format => { :with => EMAIL_REGEX, :message => " is not in format a@b.cc"},
   					  :uniqueness => true
     validates :agency_id, :presence => true
-  	validates :password, :confirmation => true,
+  	validates :password, #:confirmation => true,
   						 :length => { :within => 6..20 },
-  						 :format => PASSWORD_REGEX,
+  						 :format => { :with => PASSWORD_REGEX, :message => " has to contain 6 symbols and one of which has to be a number"} , 
   						 :presence => true,		on: :create			 
 
 end

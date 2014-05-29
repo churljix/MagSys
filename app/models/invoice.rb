@@ -5,7 +5,7 @@ class Invoice < ActiveRecord::Base
 
 
 	   validates :total, :presence => true,
-  					  numericality: true
+                   :numericality => { :greater_than_or_equal_to => 0 }
   	# validates :remaining, :presence => true,
   	# 				       numericality: true
   	validates :date, 	:presence => true

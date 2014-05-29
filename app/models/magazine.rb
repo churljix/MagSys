@@ -9,13 +9,13 @@ class Magazine < ActiveRecord::Base
   	validates :title, :presence => true,
   					  :length => { :within => 1..255 }
   	validates :issue, :presence => true,
-    					  :inclusion => 1..365
+    					  :inclusion => { :in => 1..365, :message => " has to be between 1 and 365"}
   	validates :prints, 
-  					       :inclusion => 1..100000
+  					       :inclusion => { :in => 1..999999, :message => " has to be between 1 and 999999"}
   	validates :subscribers, 
-  					  :inclusion => 1..100000
+  					  :inclusion => { :in => 1..999999, :message => " has to be between 1 and 999999"}
   	validates :readership, 
-  					  :inclusion => 1..100000				  				       
+  					  :inclusion => { :in => 1..999999, :message => " has to be between 1 and 999999"}				  				       
 
   	validates :status, :presence => true,
   					   :inclusion => { :in =>  %w(Y N) }

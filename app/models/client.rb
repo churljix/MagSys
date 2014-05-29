@@ -17,7 +17,7 @@ class Client < ActiveRecord::Base
   						:length => { :within => 3..255}					
   	validates :email, :presence => true,
   					  :length => { :within => 4..254 },
-  					  :format => { :with => EMAIL_REGEX, :message => " is not in format a@b.c"},
+  					  :format => { :with => EMAIL_REGEX, :message => " is not in format a@b.cc"},
   					  :uniqueness => true					
 
 end

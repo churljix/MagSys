@@ -8,7 +8,7 @@ class Contract < ActiveRecord::Base
 	validates :agency_id, :presence => true
 	validates :date, :presence => true
 	validates :discount, :presence => true,
-						 :inclusion => { :in => 1..100 },
+						 :inclusion => { :in => 1..100, :message => " has to be between 1 and 100"}		,
 						 numericality: true
 	validates_length_of  :notes, :maximum => 500	
   	validates :user_id, :presence => true,

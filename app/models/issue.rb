@@ -12,7 +12,7 @@ class Issue < ActiveRecord::Base
 	validates :magazine_id, :presence => true,
   					  numericality: true
   	validates :number, :presence => true,
-  					       :inclusion => 1..365
+  					       :inclusion => { :in => 1..365, :message => " has to be between 1 and 365"}
   	validates :date, 	:presence => true				
   	validates :due_date, 	:presence => true
     validates_date :due_date, :after => :date
