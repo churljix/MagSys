@@ -18,7 +18,7 @@
                 <p><b>Height: </b><%= field.height %> cm</p>
                 <p><b>Width: </b><%= field.width %> cm</p>
                 <p><b>Price: <%= number_with_precision(field.price, :precision => 2) %> EUR</b></p>
-                <% if session[:user_id] %>
+                
 
                   <%= form_for(@order, controller: 'orders', action: 'create', :html => { :class => "form-horizontal" }) do |f| %>
                     <% if @order.errors.any? %>
@@ -35,16 +35,14 @@
                     <% end %>
                         <%= f.number_field :issue_id, :class => "hidden form-control", :value => @issue.id %>                    
                         <%= f.number_field :field_id, :class => "hidden form-control", :value => field.id %>
-                        <%= f.number_field :user_id, :class => "hidden form-control", :value => session[:user_id] %>
-                        <%= f.number_field :client_id, :class => "hidden form-control", :value => 0 %>            
+                        <%= f.number_field :user_id, :class => "hidden form-control", :value => session[:user_id] %>          
                         <%= f.text_field :total_amount, :class => "hidden form-control", :value => field.price %>                  
                         <%= f.text_field :remaining, :class => "hidden form-control", :value => field.price %>                    
                         <%= f.text_field :special, :class => "hidden form-control", :value => '1' %>
-                        <%= f.text_field :status, :class => "hidden form-control", :value => 'P' %>                
+                        <%= f.text_field :status, :class => "hidden form-control", :value => 'P' %> 
+                                 
                     <center><%= f.submit "Add to Cart", :class => "show btn btn-primary "  %></center>
-                  <% end %>
-
-                <% end %>
+                  <% end %>                
           </div>
         </div>
       </div>

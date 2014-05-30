@@ -15,7 +15,7 @@ class Issue < ActiveRecord::Base
   					       :inclusion => { :in => 1..365, :message => " has to be between 1 and 365"}
   	validates :date, 	:presence => true				
   	validates :due_date, 	:presence => true
-    validates_date :due_date, :after => :date
+    validates_date :due_date, :before => :date
   	validates :status, :presence => true,
   					   :inclusion => { :in =>  %w(Y N) }		
 end

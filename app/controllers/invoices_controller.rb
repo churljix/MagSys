@@ -2,7 +2,7 @@ class InvoicesController < ApplicationController
   before_action :confirm_logged_in
   before_action :is_power_login, except: [:index, :show]
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
-  before_action :set_contracts, only: [:new, :create, :edit]
+  before_action :set_contracts, only: [:new, :create, :edit, :update]
   
   # GET /invoices
   # GET /invoices.json

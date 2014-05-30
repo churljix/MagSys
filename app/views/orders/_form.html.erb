@@ -78,7 +78,7 @@
     <div class="form-group">
       <%= f.label :client_id, :class => "col-sm-2 control-label" %>
       <div class="col-sm-9">
-        <%= f.collection_select :client_id, @clients, :id, :title , {}, :class => "form-control" %>        
+        <%= f.collection_select :client_id, @clients, :id, :title , {:prompt   => "Select client"}, :class => "form-control" %>        
       </div>
       <%= link_to new_client_path, :class => 'btn btn-link' do %>Add client <% end %>
     </div>

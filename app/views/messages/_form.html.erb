@@ -20,12 +20,12 @@
     <%= f.label :recipient_id, :class => "col-sm-2 control-label" %>
     <div class="col-sm-10">
       <% if params[:recipient_id] %>
-         <%= f.collection_select :recipient_id, user_reply(params[:recipient_id]), :id, :username, {}, :class => "form-control" %>
+         <%= f.collection_select :recipient_id, user_reply(params[:recipient_id]), :id, :username, {:prompt   => "Select recipient"}, :class => "form-control" %>
       <% else %>
         <% if is_power %>
-          <%= f.collection_select :recipient_id, @users, :id, :username, {}, :class => "form-control" %>
+          <%= f.collection_select :recipient_id, @users, :id, :username, {:prompt   => "Select recipient"}, :class => "form-control" %>
         <% else %>
-          <%= f.collection_select :recipient_id, user_admins, :id, :username, {}, :class => "form-control" %>
+          <%= f.collection_select :recipient_id, user_admins, :id, :username, {:prompt   => "Select recipient"}, :class => "form-control" %>
         <% end %>
       <% end %>
     </div>

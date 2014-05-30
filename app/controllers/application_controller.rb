@@ -12,7 +12,7 @@ private
 
   def confirm_logged_in
   	unless session[:user_id]
-  		flash[:notice]= "Please log in"
+  		flash[:notice]= "Please log in or sign up"
   		redirect_to(:controller => 'access', :action => 'login')
   		return false
   	else

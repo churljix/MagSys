@@ -46,7 +46,7 @@
   <div class="form-group">
     <%= f.label :agency_id, :class => "col-sm-2 control-label" %>
     <div class="col-sm-8">
-      <%= f.collection_select :agency_id, @agencies, :id, :title, {}, :class => "form-control" %>
+      <%= f.collection_select :agency_id, @agencies, :id, :title, {:prompt   => "Select agency"}, :class => "form-control" %>
     </div>  
     <div class="col-sm-1">
       <%= link_to new_agency_path, :class => 'btn btn-link' do %>Add agency <% end %>   
