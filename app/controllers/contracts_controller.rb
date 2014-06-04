@@ -1,18 +1,17 @@
 class ContractsController < ApplicationController
-  before_action :confirm_logged_in
-  before_action :is_power_login, except: [:index]
-  before_action :set_contract, only: [:show, :edit, :update, :destroy]
-  
+  before_action :confirm_logged_in 
+  before_action :is_power_login, except: [:index] #if has role admin
+  before_action :set_contract, only: [:show, :edit, :update, :destroy]   
   before_action :set_agencies
   before_action :set_orders
 
-
+#helpers for using in view
   helper_method :c_remaining
   helper_method :c_total
   # GET /contracts
   # GET /contracts.json
   def index
-    if is_power
+    if is_power #display different data for different roles
       @contracts = Contract.where( :status => 'Y').paginate(:page => params[:page], :per_page => 10)
     else
       @user = User.find(session[:user_id])
@@ -34,7 +33,7 @@ class ContractsController < ApplicationController
   def edit
   end
 
-  def add
+  def add #for adding order to contract by admin
     Order.where(:id => params[:orders_id]).update_all(:contract_id => params[:con_pk])
     redirect_to contracts_url
   end
@@ -80,27 +79,26 @@ class ContractsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_contract
       @contract = Contract.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Allowed parameters to update
     def contract_params
       params.require(:contract).permit(:agency_id, :date, :discount, :notes, :user_id, :status)
     end
 
-  def c_total(c_id)
-    @orders = Order.where(:contract_id => c_id)
-    @c_total = @orders.sum(:total_amount)
-    return @c_total
-  end
+    def c_total(c_id) #get the total amount for contract
+      @orders = Order.where(:contract_id => c_id)
+      @c_total = @orders.sum(:total_amount)
+      return @c_total
+    end
 
-  def c_remaining(c_id)
-   @invoices = Invoice.where(:contract_id => c_id)
-   @payments = Payment.where(:invoice_id => @invoices)
-   @remaining = @payments.sum(:amount)
-   @c_remaining = @c_total - @remaining
-   return @c_remaining
-  end
+    def c_remaining(c_id) # get the remaining amount for contract by adding all payments for contract invoices.
+     @invoices = Invoice.where(:contract_id => c_id)
+     @payments = Payment.where(:invoice_id => @invoices)
+     @remaining = @payments.sum(:amount)
+     @c_remaining = @c_total - @remaining
+     return @c_remaining
+    end
 end
